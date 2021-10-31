@@ -2,6 +2,7 @@
 pyRecAid
 
 Written by Hamed Heidari (hamed.h@live.com).
+Updated by Pouya Narimani (pouya.narimani@ut.ac.ir).
 
 (c) Copyright BCoLab, All Rights Reserved. NO WARRANTY.
 
