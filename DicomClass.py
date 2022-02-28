@@ -7,6 +7,8 @@ import gdcm
 import scipy.ndimage
 import copy
 
+# import nibabel as nib
+
 
 class DicomClass:
     dicomData = []
@@ -48,18 +50,28 @@ class DicomClass:
                     self.files.append(os.path.join(dirName, filename))
                 except:
                     time.sleep(0)
-
+                    # nib.load(os.path.join(dirName, filename))
+                    # self.files.append(os.path.join(dirName, filename))
 
         self.inst = ["" for x in range(len(self.files))]
         self.ser = ["" for x in range(len(self.files))]
         self.instN = ["" for x in range(len(self.files))]
 
+        # print(self.ser)
+
         for i in range(len(self.files)):
+            # try:
             self.info = pydicom.read_file(self.files[i])
+            # except:
+                # self.info = nib.load(self.files[i])
+
+
             self.inst[i] = self.info.SOPInstanceUID
             self.ser[i] = self.info.SeriesInstanceUID
             self.instN[i] = self.info.InstanceNumber
-            # print(i)
+
+        # print(self.ser)
+
 
         if (len(self.ser) > 0):
             id, self.idx = np.unique(self.ser, return_inverse=True)
@@ -68,6 +80,7 @@ class DicomClass:
                 temp = id[i]
                 label[i] = ("%02d" % i) + " - (" + str(len(np.where(self.idx == i)[0])) + " Images)" + " Series " + str(
                     temp)
+
         return label
 
     def DicomRead(self, id, rsizeFlag=0):
@@ -77,6 +90,11 @@ class DicomClass:
         self.scaleM = (float(info.PixelSpacing[0]), float(info.PixelSpacing[1]), float(info.SliceThickness))
         self.scale = tuple(x / min(self.scaleM) for x in self.scaleM)
         self.dicomSizePixel = (int(info.Rows), int(info.Columns), len(np.where(self.idx == id)[0]))
+
+        # print('----------------------------------------')
+        # print(self.scaleM)
+        # print(self.scale)
+        # print('----------------------------------------')
 
         tmp = [i for i in np.nonzero(self.idx == id)]
         temp = ([self.inst[i] for i in np.nonzero(self.idx == id)[0]])

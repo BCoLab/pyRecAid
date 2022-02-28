@@ -1,19 +1,25 @@
-# pyRecAid git page
 
-### Hello
+
+# pyRecAid
+
 This is the git page for Python Recording Aid, pyRecAid, an open source utility for imaging-guided cerebral recording from primate subjects. It can also be used by experimentalists to deliver drugs into specific targets within the brain.
 
 Available for Windows and Linux machines.
 
 Tested platforms:
 - Windows 10;
+- Ubuntu 20;
 - Ubuntu 18;
 - Ubuntu 16.
 
-### Requirements:
+# Overview
+![](./Resource/image1.png)
+The application involved three main functional forms. The image data including MRI or CT were imported in both Main and Co-registration forms. In Co-registration image series were registered over each other by affine transformation, the results were sent to Main form. Re-slicing images were extracted from image data in the Main form. In the Re-slice form the precise information of brain region will be present in any new coordination system.
+
+# Requirements
 All the requirements are downloaded from python repositories (PyPI and conda channels) as described in the section on installation (see below). A list of the required libraries can also be found at ./files/requirements.txt.
 
-### Installation Guide:
+# Installation Guide
 Simply download or clone the directory to a desired location on your local system (extract the .zip file in case of downloading). Then redirect to this folder on your system to find the following files and folders:
 
 src → here you will see the program scripts including the main method […].
@@ -48,20 +54,35 @@ Open a terminal with your desired python3 environment activated and type in the 
 ```
 -	In case you do not want to install anaconda, you can download the GDCM library at:	https://sourceforge.net/p/gdcm/gdcm/
 
-Running the program
+# Running the program
 Redirect to the %directory of downloaded files%/src/and run Main.py
 
-User guide
+# User guide
 A user guide, manual.pdf, can be found at the src directory.
 
-Contact Information
-You are welcome to send your questions or suggestions about the program to Hamed Heirari Gorji, the main developer of the project to hamed.h@live.com. You are also encouraged to take part in the future developments of the project and to tailor the program according to your needs. 
-Suggestions for Further Development
+# Contact Information
+You are welcome to send your questions or suggestions about the program to Hamed Heirari Gorji, the main developer of the project to hamed.h@live.com or Pouya Narimani to pouya.narimani@ut.ac.ir. You are also encouraged to take part in the future developments of the project and to tailor the program according to your needs.
+
+# Suggestions for Further Development:
 Suggestions in this sections can be incorporated into the future editions of the program either by the original developers or any other interested individual. The current listing:
 -	Adding a 3d view of the MR and CT series
 -	Addition of a logger for keeping track of targeted areas between sessions
-"# pyRecAid" 
-"# pyRecAid" 
-"# pyRecAid" 
-"# pyRecAid" 
-"# pyRecAid" 
+
+# Citation
+If pyRecAid helps your research, please cite our paper in your publications.
+
+```
+@article{Heydari_2022,
+	doi = {},
+	url = {},
+	year = 2022,
+	month = {},
+	publisher = {Elsevier},
+	volume = {},
+	number = {},
+	author = {Ehsan Rezayat, Hamed Heidari-Gorji, Farzad Shayanfar, Pouya Narimani, Abolhasan Ertiaei, Mohammad-Reza A.
+	Dehaqani},
+	title = {A Multimodal Imaging-guided Software for Access to Primate Brains},
+	journal = {Heliyon}
+}
+```

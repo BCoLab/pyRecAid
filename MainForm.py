@@ -16,6 +16,7 @@ Updated by Pouya Narimani (pouya.narimani@ut.ac.ir).
 import scipy.ndimage
 import math
 from DicomClass import *
+from NiftiClass import *
 from ResliceForm import *
 from CoregistrationForm import *
 from ChamberClass import *
@@ -725,7 +726,9 @@ class MainForm(QtWidgets.QMainWindow):
                 if fname[0]:
                     self.listWidget.clear()
                     self.dicom = DicomClass()
+                    # print('ok1')
                     xx = self.dicom.DicomSelect(fname)
+                    # print(xx)
                     for i in range(len(xx)):
                         item = QtWidgets.QListWidgetItem(xx[i])
                         self.listWidget.addItem(item)
@@ -733,11 +736,22 @@ class MainForm(QtWidgets.QMainWindow):
                     self.loadDataButton.setEnabled(True)
                 self.dicom.dicomClassState = 1
         except:
-            time.sleep(0.001)
+            # time.sleep(0.001)
+            with self.WaitCursor():
+                if fname[0]:
+                    self.listWidget.clear()
+                    self.dicom = NiftiClass()
+                    xx = self.dicom.DicomSelect(fname)
+                    for i in range(len(xx)):
+                        item = QtWidgets.QListWidgetItem(xx[i])
+                        self.listWidget.addItem(item)
+                if (~self.loadDataButton.isEnabled()):
+                    self.loadDataButton.setEnabled(True)
+                self.dicom.dicomClassState = 1
 
     def LoadData(self):
-        value = int(self.listWidget.currentItem().text()[0:2])
         try:
+            value = int(self.listWidget.currentItem().text()[0:2])
             with self.WaitCursor():
                 self.dicom.DicomRead(value)
 
@@ -757,11 +771,31 @@ class MainForm(QtWidgets.QMainWindow):
                 # self.QIButton.setEnabled(True)
 
         except:
-            msg = QtWidgets.QMessageBox()
-            msg.setIcon(QtWidgets.QMessageBox.Information)
-            msg.setWindowTitle("Error")
-            msg.setText('Dicom Series is not correct')
-            msg.exec_()
+            # print('----------------------------------')
+            # print(self.listWidget.currentItem().text())
+            value = self.listWidget.currentItem().text()
+            with self.WaitCursor():
+                self.dicom.DicomRead(value)
+
+                # for i in range(self.dicom.dicomSizePixel[0]):
+                #     self.dicom.dicomData[i, :, :] = np.flip(self.dicom.dicomData[i, :, :], axis=1)
+                # self.dicom.dicomDataRaw = copy.deepcopy(self.dicom.dicomData)
+
+                self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
+                                  int(self.dicom.dicomSizePixel[2] / 2))
+                self.dicom.zeroPos = (0, 0, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+                self.setZeroButton.setEnabled(True)
+                self.resliceButton.setEnabled(True)
+                self.dicom.dicomClassState = 2
+
+            # msg = QtWidgets.QMessageBox()
+            # msg.setIcon(QtWidgets.QMessageBox.Information)
+            # msg.setWindowTitle("Error")
+            # msg.setText('Dicom Series is not correct')
+            # msg.exec_()
 
     def SaveFile(self):
         fname = QtWidgets.QFileDialog.getSaveFileName(filter='*.dcmf')
@@ -1007,6 +1041,8 @@ class MainForm(QtWidgets.QMainWindow):
         a2 = ct[:, :, pos[2]]
 
         a0 = cv2.rotate(a0, cv2.ROTATE_180)
+
+        # print(ct.min(), ct.max())
 
         # a0 = cv2.equalizeHist(a0)
         # a1 = cv2.equalizeHist(a1)

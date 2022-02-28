@@ -10,6 +10,7 @@ import cv2
 import scipy.ndimage
 from scipy import ndimage
 # import math
+from NiftiClass import *
 from DicomClass import *
 from ResliceForm import *
 # from ResliceData import *
@@ -506,11 +507,23 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                         self.listWidget.addItem(item)
                 if (~self.loadDataButton.isEnabled()):
                     self.loadDataButton.setEnabled(True)
-                self.mainform.dicom = []
+                # self.mainform.dicom = []
         except:
-            time.sleep(0.001)
+            # time.sleep(0.001)
+            with self.WaitCursor():
+                if fname[0]:
+                    self.listWidget.clear()
+                    self.dicom = NiftiClass()
+                    xx = self.dicom.DicomSelect(fname)
+                    for i in range(len(xx)):
+                        item = QtWidgets.QListWidgetItem(xx[i])
+                        self.listWidget.addItem(item)
+                if (~self.loadDataButton.isEnabled()):
+                    self.loadDataButton.setEnabled(True)
+                # self.mainform.dicom = []
 
     def LoadDirB(self):
+        print('ok1')
         fname = QtWidgets.QFileDialog.getExistingDirectory()
         try:
             with self.WaitCursor():
@@ -524,22 +537,46 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                 if (~self.loadDataButtonB.isEnabled()):
                     self.loadDataButtonB.setEnabled(True)
         except:
-            time.sleep(0.001)
+            with self.WaitCursor():
+                if fname[0]:
+                    self.listWidgetB.clear()
+                    self.dicomB = NiftiClass()
+                    xx = self.dicomB.DicomSelect(fname)
+                    for i in range(len(xx)):
+                        item = QtWidgets.QListWidgetItem(xx[i])
+                        self.listWidgetB.addItem(item)
+                if (~self.loadDataButtonB.isEnabled()):
+                    self.loadDataButtonB.setEnabled(True)
 
     def LoadData(self):
-        value = int(self.listWidget.currentItem().text()[0:2])
-        # try:
-        with self.WaitCursor():
-            self.dicom.DicomRead(value, 1)
-            # self.dicom.dicomSize=np.shape(self.dicom.dicomData)
-            self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
-                              int(self.dicom.dicomSizePixel[2] / 2))
-            self.dicom.zeroPos = (0, 0, 0)
-            self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
-            self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
-            self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+        try:
+            value = int(self.listWidget.currentItem().text()[0:2])
+            with self.WaitCursor():
+                self.dicom.DicomRead(value, 1)
+                # self.dicom.dicomSize=np.shape(self.dicom.dicomData)
+                self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
+                                  int(self.dicom.dicomSizePixel[2] / 2))
+                self.dicom.zeroPos = (0, 0, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
 
-        # except:
+        except:
+            value = self.listWidget.currentItem().text()
+            with self.WaitCursor():
+                self.dicom.DicomRead(value)
+
+                # for i in range(self.dicom.dicomSizePixel[0]):
+                #     self.dicom.dicomData[i, :, :] = np.flip(self.dicom.dicomData[i, :, :], axis=1)
+                # self.dicom.dicomDataRaw = copy.deepcopy(self.dicom.dicomData)
+
+                self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
+                                  int(self.dicom.dicomSizePixel[2] / 2))
+                self.dicom.zeroPos = (0, 0, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+
         #     msg = QtWidgets.QMessageBox()
         #     msg.setIcon(QtWidgets.QMessageBox.Information)
         #     msg.setWindowTitle("Error")
@@ -547,12 +584,12 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         #     msg.exec_()
 
     def LoadDataB(self):
-        value = int(self.listWidgetB.currentItem().text()[0:2])
         try:
+            value = int(self.listWidgetB.currentItem().text()[0:2])
             with self.WaitCursor():
                 self.dicomB.DicomRead(value, 1)
 
-                # self.dicom.dicomSize=np.shape(self.dicom.dicomData)
+                # self.dicomB.dicomSize=np.shape(self.dicomB.dicomData)
                 self.dicomB.pos = (int(self.dicomB.dicomSizePixel[0] / 2), int(self.dicomB.dicomSizePixel[1] / 2),
                                    int(self.dicomB.dicomSizePixel[2] / 2))
                 self.dicomB.zeroPos = (0, 0, 0)
@@ -561,11 +598,21 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                 self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
 
         except:
-            msg = QtWidgets.QMessageBox()
-            msg.setIcon(QtWidgets.QMessageBox.Information)
-            msg.setWindowTitle("Error")
-            msg.setText('Dicom Series is not correct')
-            msg.exec_()
+            value = self.listWidget.currentItem().text()
+            with self.WaitCursor():
+                self.dicomB.DicomRead(value)
+
+                self.dicomB.pos = (int(self.dicomB.dicomSizePixel[0] / 2), int(self.dicomB.dicomSizePixel[1] / 2),
+                                  int(self.dicomB.dicomSizePixel[2] / 2))
+                self.dicomB.zeroPos = (0, 0, 0)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
+            # msg = QtWidgets.QMessageBox()
+            # msg.setIcon(QtWidgets.QMessageBox.Information)
+            # msg.setWindowTitle("Error")
+            # msg.setText('Dicom Series is not correct')
+            # msg.exec_()
 
     def ShowDicom(self, ct, pos, frame):
         diSize = np.shape(ct)
