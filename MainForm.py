@@ -722,80 +722,82 @@ class MainForm(QtWidgets.QMainWindow):
     def LoadDir(self):
         fname = QtWidgets.QFileDialog.getExistingDirectory()
         try:
-            with self.WaitCursor():
-                if fname[0]:
-                    self.listWidget.clear()
-                    self.dicom = DicomClass()
-                    # print('ok1')
-                    xx = self.dicom.DicomSelect(fname)
-                    # print(xx)
-                    for i in range(len(xx)):
-                        item = QtWidgets.QListWidgetItem(xx[i])
-                        self.listWidget.addItem(item)
-                if (~self.loadDataButton.isEnabled()):
-                    self.loadDataButton.setEnabled(True)
-                self.dicom.dicomClassState = 1
+            try:
+                with self.WaitCursor():
+                    if fname[0]:
+                        self.listWidget.clear()
+                        self.dicom = DicomClass()
+                        # print('ok1')
+                        xx = self.dicom.DicomSelect(fname)
+                        # print(xx)
+                        for i in range(len(xx)):
+                            item = QtWidgets.QListWidgetItem(xx[i])
+                            self.listWidget.addItem(item)
+                    if (~self.loadDataButton.isEnabled()):
+                        self.loadDataButton.setEnabled(True)
+                    self.dicom.dicomClassState = 1
+            except:
+                with self.WaitCursor():
+                    if fname[0]:
+                        self.listWidget.clear()
+                        self.dicom = NiftiClass()
+                        xx = self.dicom.DicomSelect(fname)
+                        for i in range(len(xx)):
+                            item = QtWidgets.QListWidgetItem(xx[i])
+                            self.listWidget.addItem(item)
+                    if (~self.loadDataButton.isEnabled()):
+                        self.loadDataButton.setEnabled(True)
+                    self.dicom.dicomClassState = 1
         except:
-            # time.sleep(0.001)
-            with self.WaitCursor():
-                if fname[0]:
-                    self.listWidget.clear()
-                    self.dicom = NiftiClass()
-                    xx = self.dicom.DicomSelect(fname)
-                    for i in range(len(xx)):
-                        item = QtWidgets.QListWidgetItem(xx[i])
-                        self.listWidget.addItem(item)
-                if (~self.loadDataButton.isEnabled()):
-                    self.loadDataButton.setEnabled(True)
-                self.dicom.dicomClassState = 1
+            time.sleep(0.001)
 
     def LoadData(self):
         try:
-            value = int(self.listWidget.currentItem().text()[0:2])
-            with self.WaitCursor():
-                self.dicom.DicomRead(value)
+            try:
+                value = int(self.listWidget.currentItem().text()[0:2])
+                with self.WaitCursor():
+                    self.dicom.DicomRead(value)
 
-                # for i in range(self.dicom.dicomSizePixel[0]):
-                #     self.dicom.dicomData[i, :, :] = np.flip(self.dicom.dicomData[i, :, :], axis=1)
-                # self.dicom.dicomDataRaw = copy.deepcopy(self.dicom.dicomData)
+                    # for i in range(self.dicom.dicomSizePixel[0]):
+                    #     self.dicom.dicomData[i, :, :] = np.flip(self.dicom.dicomData[i, :, :], axis=1)
+                    # self.dicom.dicomDataRaw = copy.deepcopy(self.dicom.dicomData)
 
-                self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
-                                  int(self.dicom.dicomSizePixel[2] / 2))
-                self.dicom.zeroPos = (0, 0, 0)
-                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
-                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
-                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
-                self.setZeroButton.setEnabled(True)
-                self.resliceButton.setEnabled(True)
-                self.dicom.dicomClassState = 2
-                # self.QIButton.setEnabled(True)
+                    self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
+                                      int(self.dicom.dicomSizePixel[2] / 2))
+                    self.dicom.zeroPos = (0, 0, 0)
+                    self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                    self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                    self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+                    self.setZeroButton.setEnabled(True)
+                    self.resliceButton.setEnabled(True)
+                    self.dicom.dicomClassState = 2
+                    # self.QIButton.setEnabled(True)
+
+            except:
+                value = self.listWidget.currentItem().text()
+                with self.WaitCursor():
+                    self.dicom.DicomRead(value)
+
+                    # for i in range(self.dicom.dicomSizePixel[0]):
+                    #     self.dicom.dicomData[i, :, :] = np.flip(self.dicom.dicomData[i, :, :], axis=1)
+                    # self.dicom.dicomDataRaw = copy.deepcopy(self.dicom.dicomData)
+
+                    self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
+                                      int(self.dicom.dicomSizePixel[2] / 2))
+                    self.dicom.zeroPos = (0, 0, 0)
+                    self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                    self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                    self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+                    self.setZeroButton.setEnabled(True)
+                    self.resliceButton.setEnabled(True)
+                    self.dicom.dicomClassState = 2
 
         except:
-            # print('----------------------------------')
-            # print(self.listWidget.currentItem().text())
-            value = self.listWidget.currentItem().text()
-            with self.WaitCursor():
-                self.dicom.DicomRead(value)
-
-                # for i in range(self.dicom.dicomSizePixel[0]):
-                #     self.dicom.dicomData[i, :, :] = np.flip(self.dicom.dicomData[i, :, :], axis=1)
-                # self.dicom.dicomDataRaw = copy.deepcopy(self.dicom.dicomData)
-
-                self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
-                                  int(self.dicom.dicomSizePixel[2] / 2))
-                self.dicom.zeroPos = (0, 0, 0)
-                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
-                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
-                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
-                self.setZeroButton.setEnabled(True)
-                self.resliceButton.setEnabled(True)
-                self.dicom.dicomClassState = 2
-
-            # msg = QtWidgets.QMessageBox()
-            # msg.setIcon(QtWidgets.QMessageBox.Information)
-            # msg.setWindowTitle("Error")
-            # msg.setText('Dicom Series is not correct')
-            # msg.exec_()
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)
+            msg.setWindowTitle("Error")
+            msg.setText('Dicom Series is not correct')
+            msg.exec_()
 
     def SaveFile(self):
         fname = QtWidgets.QFileDialog.getSaveFileName(filter='*.dcmf')
@@ -829,10 +831,10 @@ class MainForm(QtWidgets.QMainWindow):
                     #     self.setZeroButton.setEnabled(True)
 
         except Exception as inst:
-            print(type(inst))  # the exception instance
-            print(inst.args)  # arguments stored in .args
-            print(inst)
-            #     time.sleep(0.001)
+            # print(type(inst))  # the exception instance
+            # print(inst.args)  # arguments stored in .args
+            # print(inst)
+            time.sleep(0.001)
 
     def plot_3d(self, image, threshold=50): 
         p = image.transpose(2,1,0)

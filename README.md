@@ -11,6 +11,7 @@ Tested platforms:
 - Ubuntu 20;
 - Ubuntu 18;
 - Ubuntu 16.
+- MacOS.
 
 # Overview
 ![](./Resource/image1.png)

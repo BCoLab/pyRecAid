@@ -67,33 +67,33 @@ class CoregistrationForm(QtWidgets.QMainWindow):
 
         # list
         self.listWidgetB = QtWidgets.QListWidget(self)
-        self.listWidgetB.move(50, 340)
+        self.listWidgetB.move(50, 300)
         self.listWidgetB.resize(300, 180)
 
         # button
         self.openDirB = QtWidgets.QPushButton("&Load Folder", self)
-        self.openDirB.move(67, 540)
+        self.openDirB.move(67, 500)
         self.openDirB.clicked.connect(self.LoadDirB)
 
         # button
         self.loadDataButtonB = QtWidgets.QPushButton("&Load", self)
-        self.loadDataButtonB.move(233, 540)
+        self.loadDataButtonB.move(233, 500)
         self.loadDataButtonB.clicked.connect(self.LoadDataB)
         self.loadDataButtonB.setEnabled(False)
 
-        # flip region
-        self.flipReg = QtWidgets.QGroupBox('&Flip', self)
-        self.flipReg.move(67, 685)
-        self.flipReg.resize(266, 110)
-        self.flipReg.hide()
+        # flip & swap region
+        self.flipswapReg = QtWidgets.QGroupBox('&Flip and &Swap', self)
+        self.flipswapReg.move(67, 850)
+        self.flipswapReg.resize(266, 150)
+        self.flipswapReg.hide()
 
         # Pouya Box
-        self.my_box = QtWidgets.QLabel("Dicom Selection:", self.flipReg)
+        self.my_box = QtWidgets.QLabel("Series Selection:", self.flipswapReg)
         self.my_box.move(10, 30)
         self.my_box.resize(150, 30)
 
         # Pouya list
-        self.MRIorCT = QtWidgets.QComboBox(self.flipReg)
+        self.MRIorCT = QtWidgets.QComboBox(self.flipswapReg)
         self.MRIorCT.addItem("Select Series")
         self.MRIorCT.addItem("First Series")
         self.MRIorCT.addItem("Second Series")
@@ -101,79 +101,216 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         self.MRIorCT.resize(130, 30)
 
         # button pouya
-        self.flip_a = QtWidgets.QPushButton("Flip_H", self.flipReg)
+        self.flip_a = QtWidgets.QPushButton("Flip &H", self.flipswapReg)
         self.flip_a.resize(70, 30)
         self.flip_a.move(10, 70)
         self.flip_a.clicked.connect(self.my_flip_a)
 
         # button pouya
-        self.flip_b = QtWidgets.QPushButton("Flip_S", self.flipReg)
+        self.flip_b = QtWidgets.QPushButton("Flip &S", self.flipswapReg)
         self.flip_b.resize(70, 30)
         self.flip_b.move(100, 70)
         self.flip_b.clicked.connect(self.my_flip_b)
 
         # button pouya
-        self.flip_c = QtWidgets.QPushButton("Flip_C", self.flipReg)
+        self.flip_c = QtWidgets.QPushButton("Flip &C", self.flipswapReg)
         self.flip_c.resize(70, 30)
         self.flip_c.move(190, 70)
         self.flip_c.clicked.connect(self.my_flip_c)
 
-        # end of region
-
-        # swap region
-        self.swap = QtWidgets.QGroupBox('&Swap', self)
-        self.swap.move(67, 805)
-        self.swap.resize(266, 110)
-        self.swap.hide()
-
-        # Pouya Box
-        self.my_box1 = QtWidgets.QLabel("Dicom Selection:", self.swap)
-        self.my_box1.move(10, 30)
-        self.my_box1.resize(150, 30)
-
-        # Pouya list
-        self.MRIorCTs = QtWidgets.QComboBox(self.swap)
-        self.MRIorCTs.addItem("Select Series")
-        self.MRIorCTs.addItem("First Series")
-        self.MRIorCTs.addItem("Second Series")
-        self.MRIorCTs.move(130, 30)
-        self.MRIorCTs.resize(130, 30)
-
         # button pouya
-        self.swap_a = QtWidgets.QPushButton("Swap12", self.swap)
+        self.swap_a = QtWidgets.QPushButton("Swap &H&S", self.flipswapReg)
         self.swap_a.resize(70, 30)
-        self.swap_a.move(10, 70)
+        self.swap_a.move(10, 110)
         self.swap_a.clicked.connect(self.swap12)
 
         # button pouya
-        self.swap_b = QtWidgets.QPushButton("Swap13", self.swap)
+        self.swap_b = QtWidgets.QPushButton("Swap &H&C", self.flipswapReg)
         self.swap_b.resize(70, 30)
-        self.swap_b.move(100, 70)
+        self.swap_b.move(100, 110)
         self.swap_b.clicked.connect(self.swap13)
 
         # button pouya
-        self.swap_c = QtWidgets.QPushButton("Swap23", self.swap)
+        self.swap_c = QtWidgets.QPushButton("Swap &S&C", self.flipswapReg)
         self.swap_c.resize(70, 30)
-        self.swap_c.move(190, 70)
+        self.swap_c.move(190, 110)
         self.swap_c.clicked.connect(self.swap23)
+
+        # end of region
+
+        # # swap region
+        # self.swap = QtWidgets.QGroupBox('&Swap', self)
+        # self.swap.move(67, 885)
+        # self.swap.resize(266, 110)
+        # self.swap.hide()
+
+        # # Pouya Box
+        # self.my_box1 = QtWidgets.QLabel("Dicom Selection:", self.swap)
+        # self.my_box1.move(10, 30)
+        # self.my_box1.resize(150, 30)
+
+        # # Pouya list
+        # self.MRIorCTs = QtWidgets.QComboBox(self.swap)
+        # self.MRIorCTs.addItem("Select Series")
+        # self.MRIorCTs.addItem("First Series")
+        # self.MRIorCTs.addItem("Second Series")
+        # self.MRIorCTs.move(130, 30)
+        # self.MRIorCTs.resize(130, 30)
+
+        # # button pouya
+        # self.swap_a = QtWidgets.QPushButton("Swap12", self.swap)
+        # self.swap_a.resize(70, 30)
+        # self.swap_a.move(10, 70)
+        # self.swap_a.clicked.connect(self.swap12)
+
+        # # button pouya
+        # self.swap_b = QtWidgets.QPushButton("Swap13", self.swap)
+        # self.swap_b.resize(70, 30)
+        # self.swap_b.move(100, 70)
+        # self.swap_b.clicked.connect(self.swap13)
+
+        # # button pouya
+        # self.swap_c = QtWidgets.QPushButton("Swap23", self.swap)
+        # self.swap_c.resize(70, 30)
+        # self.swap_c.move(190, 70)
+        # self.swap_c.clicked.connect(self.swap23)
+
+        # # end of region
+
+        # Shifting region
+        self.shift = QtWidgets.QGroupBox('&Shift and &Crop', self)
+        self.shift.move(67, 550)
+        self.shift.resize(266, 260)
+        self.shift.hide()
+
+        # Pouya Box
+        self.my_box2 = QtWidgets.QLabel("Series Selection:", self.shift)
+        self.my_box2.move(10, 30)
+        self.my_box2.resize(150, 30)
+
+        # Pouya list
+        self.MRIorCTsh = QtWidgets.QComboBox(self.shift)
+        self.MRIorCTsh.addItem("Select Series")
+        self.MRIorCTsh.addItem("First Series")
+        self.MRIorCTsh.addItem("Second Series")
+        self.MRIorCTsh.move(130, 30)
+        self.MRIorCTsh.resize(130, 30)
+
+        # button pouya
+        self.shift_r = QtWidgets.QPushButton("Hu", self.shift)
+        self.shift_r.resize(70, 30)
+        self.shift_r.move(10, 70)
+        self.shift_r.clicked.connect(self.shift_Hu)
+
+        # button pouya
+        self.shift_l = QtWidgets.QPushButton("Hd", self.shift)
+        self.shift_l.resize(70, 30)
+        self.shift_l.move(10, 110)
+        self.shift_l.clicked.connect(self.shift_Hd)
+
+        # button pouya
+        self.shift_u = QtWidgets.QPushButton("Su", self.shift)
+        self.shift_u.resize(70, 30)
+        self.shift_u.move(97, 70)
+        self.shift_u.clicked.connect(self.shift_Su)
+
+        # button pouya
+        self.shift_d = QtWidgets.QPushButton("Sd", self.shift)
+        self.shift_d.resize(70, 30)
+        self.shift_d.move(97, 110)
+        self.shift_d.clicked.connect(self.shift_Sd)
+
+        # button pouya
+        self.shift_d = QtWidgets.QPushButton("Cu", self.shift)
+        self.shift_d.resize(70, 30)
+        self.shift_d.move(184, 70)
+        self.shift_d.clicked.connect(self.shift_Cu)
+
+        # button pouya
+        self.shift_d = QtWidgets.QPushButton("Cd", self.shift)
+        self.shift_d.resize(70, 30)
+        self.shift_d.move(184, 110)
+        self.shift_d.clicked.connect(self.shift_Cd)
+
+        # spinbox
+        self.spinboxLabelch0 = QtWidgets.QLabel("Ht:", self.shift)
+        self.spinboxLabelch0.move(10, 160)
+        self.spinboxch0 = QtWidgets.QSpinBox(self.shift)
+        self.spinboxch0.move(35, 155)
+        self.spinboxch0.setMinimum(0)
+        self.spinboxch0.setMaximum(20)
+        self.spinboxch0.setValue(0)
+
+        self.spinboxLabelch1 = QtWidgets.QLabel("St:", self.shift)
+        self.spinboxLabelch1.move(95, 160)
+        self.spinboxch1 = QtWidgets.QSpinBox(self.shift)
+        self.spinboxch1.move(120, 155)
+        self.spinboxch1.setMinimum(0)
+        self.spinboxch1.setMaximum(20)
+        self.spinboxch1.setValue(0)
+
+        self.spinboxLabelch2 = QtWidgets.QLabel("Ct:", self.shift)
+        self.spinboxLabelch2.move(180, 160)
+        self.spinboxch2 = QtWidgets.QSpinBox(self.shift)
+        self.spinboxch2.move(205, 155)
+        self.spinboxch2.setMinimum(0)
+        self.spinboxch2.setMaximum(20)
+        self.spinboxch2.setValue(0)
+
+        self.spinboxLabelch3 = QtWidgets.QLabel("Hd:", self.shift)
+        self.spinboxLabelch3.move(10, 185)
+        self.spinboxch3 = QtWidgets.QSpinBox(self.shift)
+        self.spinboxch3.move(35, 180)
+        self.spinboxch3.setMinimum(0)
+        self.spinboxch3.setMaximum(20)
+        self.spinboxch3.setValue(0)
+
+        self.spinboxLabelch4 = QtWidgets.QLabel("Sd:", self.shift)
+        self.spinboxLabelch4.move(95, 185)
+        self.spinboxch4 = QtWidgets.QSpinBox(self.shift)
+        self.spinboxch4.move(120, 180)
+        self.spinboxch4.setMinimum(0)
+        self.spinboxch4.setMaximum(20)
+        self.spinboxch4.setValue(0)
+
+        self.spinboxLabelch5 = QtWidgets.QLabel("Cd:", self.shift)
+        self.spinboxLabelch5.move(180, 185)
+        self.spinboxch5 = QtWidgets.QSpinBox(self.shift)
+        self.spinboxch5.move(205, 180)
+        self.spinboxch5.setMinimum(0)
+        self.spinboxch5.setMaximum(20)
+        self.spinboxch5.setValue(0)
+
+        # button pouya
+        self.croppreview = QtWidgets.QPushButton("Crop preview", self.shift)
+        self.croppreview.resize(110, 30)
+        self.croppreview.move(10, 220)
+        self.croppreview.clicked.connect(self.crop_preview)
+
+        # button pouya
+        self.crop = QtWidgets.QPushButton("Crop", self.shift)
+        self.crop.resize(110, 30)
+        self.crop.move(142, 220)
+        self.crop.clicked.connect(self.Crop)
 
         # end of region
 
         # point selection and coregistration region
         self.pointReg = QtWidgets.QGroupBox('&Point selection', self)
-        self.pointReg.move(67, 590)
+        self.pointReg.move(67, 550)
         self.pointReg.resize(266, 90)
+        self.pointReg.hide()
 
         # button pouya
         self.selectpointButton = QtWidgets.QPushButton("&Select Point", self.pointReg)
         self.selectpointButton.resize(100, 30)
-        self.selectpointButton.move(15, 55)
+        self.selectpointButton.move(15, 50)
         self.selectpointButton.clicked.connect(self.select_point)
 
         # button pouya
         self.clearpointsButton = QtWidgets.QPushButton("&Clear Points", self.pointReg)
         self.clearpointsButton.resize(100, 30)
-        self.clearpointsButton.move(150, 55)
+        self.clearpointsButton.move(150, 50)
         self.clearpointsButton.clicked.connect(self.clear_point)
 
         # pouya chekbox
@@ -200,14 +337,14 @@ class CoregistrationForm(QtWidgets.QMainWindow):
 
         # button
         self.combineButton = QtWidgets.QPushButton("&Coregistration", self)
-        self.combineButton.resize(140, 30)
-        self.combineButton.move(50, 940)
+        self.combineButton.resize(160, 40)
+        self.combineButton.move(745, 940)
         self.combineButton.clicked.connect(self.combine)
 
         # button
         self.sendMainButton = QtWidgets.QPushButton("&Send To MainForm", self)
-        self.sendMainButton.resize(140, 30)
-        self.sendMainButton.move(210, 940)
+        self.sendMainButton.resize(160, 40)
+        self.sendMainButton.move(1175, 940)
         self.sendMainButton.clicked.connect(self.sendMain)
 
         font = QtGui.QFont()
@@ -443,15 +580,27 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         # self.spinbox2.setMaximum(100)
         # self.spinbox2.setValue(0)
 
-        flipMenu = QtWidgets.QAction('Flip', self)
-        flipMenu.setCheckable(True)
-        flipMenu.setStatusTip('flip')
+        shiftMenu = QtWidgets.QAction('Shift', self)
+        # shiftMenu.setCheckable(True)
+        shiftMenu.setStatusTip('shift')
+        shiftMenu.triggered.connect(self.ShiftMenu)
+
+        pointsMenu = QtWidgets.QAction('Registration', self)
+        # pointsMenu.setCheckable(True)
+        pointsMenu.setStatusTip('registration')
+        pointsMenu.triggered.connect(self.PointSelectionMenu)
+
+        flipMenu = QtWidgets.QAction('Flip/Swap', self)
+        # flipMenu.setCheckable(True)
+        flipMenu.setStatusTip('flip & swap')
         flipMenu.triggered.connect(self.FlipMenu)
 
-        swapMenu = QtWidgets.QAction('Swap', self)
-        swapMenu.setCheckable(True)
-        swapMenu.setStatusTip('swap')
-        swapMenu.triggered.connect(self.SwapMenu)
+        # swapMenu = QtWidgets.QAction('Swap', self)
+        # swapMenu.setCheckable(True)
+        # swapMenu.setStatusTip('swap')
+        # swapMenu.triggered.connect(self.SwapMenu)
+
+        
 
 
         # menu
@@ -463,27 +612,51 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         fileMenu = menubar.addMenu('&File')
         toolsMenu = menubar.addMenu('&Tools')
         fileMenu.addAction(openFile)
+        toolsMenu.addAction(shiftMenu)
+        toolsMenu.addAction(pointsMenu)
         toolsMenu.addAction(flipMenu)
-        toolsMenu.addAction(swapMenu)
+        # toolsMenu.addAction(swapMenu)
 
         self.Fflag = False
-        self.Sflag = False
+        # self.Sflag = False
+        self.Shflag = False
+        self.PSflag = False
 
     def FlipMenu(self):
         if self.Fflag:
-            self.flipReg.hide()
+            self.flipswapReg.hide()
             self.Fflag = False
         else:
-            self.flipReg.show()
+            self.flipswapReg.show()
             self.Fflag = True
 
-    def SwapMenu(self):
-        if self.Sflag:
-            self.swap.hide()
-            self.Sflag = False
+    # def SwapMenu(self):
+    #     if self.Sflag:
+    #         self.swap.hide()
+    #         self.Sflag = False
+    #     else:
+    #         self.swap.show()
+    #         self.Sflag = True
+
+    def ShiftMenu(self):
+        if self.Shflag:
+            self.shift.hide()
+            self.Shflag = False
         else:
-            self.swap.show()
-            self.Sflag = True
+            self.pointReg.hide()
+            self.PSflag = False
+            self.shift.show()
+            self.Shflag = True
+
+    def PointSelectionMenu(self):
+        if self.PSflag:
+            self.pointReg.hide()
+            self.PSflag = False
+        else:
+            self.shift.hide()
+            self.Shflag = False
+            self.pointReg.show()
+            self.PSflag = True
 
     @contextmanager
     def WaitCursor(self):
@@ -497,122 +670,130 @@ class CoregistrationForm(QtWidgets.QMainWindow):
     def LoadDir(self):
         fname = QtWidgets.QFileDialog.getExistingDirectory()
         try:
-            with self.WaitCursor():
-                if fname[0]:
-                    self.listWidget.clear()
-                    self.dicom = DicomClass()
-                    xx = self.dicom.DicomSelect(fname)
-                    for i in range(len(xx)):
-                        item = QtWidgets.QListWidgetItem(xx[i])
-                        self.listWidget.addItem(item)
-                if (~self.loadDataButton.isEnabled()):
-                    self.loadDataButton.setEnabled(True)
-                # self.mainform.dicom = []
+            try:
+                with self.WaitCursor():
+                    if fname[0]:
+                        self.listWidget.clear()
+                        self.dicom = DicomClass()
+                        xx = self.dicom.DicomSelect(fname)
+                        for i in range(len(xx)):
+                            item = QtWidgets.QListWidgetItem(xx[i])
+                            self.listWidget.addItem(item)
+                    if (~self.loadDataButton.isEnabled()):
+                        self.loadDataButton.setEnabled(True)
+                    # self.mainform.dicom = []
+            except:
+                with self.WaitCursor():
+                    if fname[0]:
+                        self.listWidget.clear()
+                        self.dicom = NiftiClass()
+                        xx = self.dicom.DicomSelect(fname)
+                        for i in range(len(xx)):
+                            item = QtWidgets.QListWidgetItem(xx[i])
+                            self.listWidget.addItem(item)
+                    if (~self.loadDataButton.isEnabled()):
+                        self.loadDataButton.setEnabled(True)
+                    # self.mainform.dicom = []
         except:
-            # time.sleep(0.001)
-            with self.WaitCursor():
-                if fname[0]:
-                    self.listWidget.clear()
-                    self.dicom = NiftiClass()
-                    xx = self.dicom.DicomSelect(fname)
-                    for i in range(len(xx)):
-                        item = QtWidgets.QListWidgetItem(xx[i])
-                        self.listWidget.addItem(item)
-                if (~self.loadDataButton.isEnabled()):
-                    self.loadDataButton.setEnabled(True)
-                # self.mainform.dicom = []
+            time.sleep(0.001)
 
     def LoadDirB(self):
-        print('ok1')
         fname = QtWidgets.QFileDialog.getExistingDirectory()
         try:
-            with self.WaitCursor():
-                if fname[0]:
-                    self.listWidgetB.clear()
-                    self.dicomB = DicomClass()
-                    xx = self.dicomB.DicomSelect(fname)
-                    for i in range(len(xx)):
-                        item = QtWidgets.QListWidgetItem(xx[i])
-                        self.listWidgetB.addItem(item)
-                if (~self.loadDataButtonB.isEnabled()):
-                    self.loadDataButtonB.setEnabled(True)
+            try:
+                with self.WaitCursor():
+                    if fname[0]:
+                        self.listWidgetB.clear()
+                        self.dicomB = DicomClass()
+                        xx = self.dicomB.DicomSelect(fname)
+                        for i in range(len(xx)):
+                            item = QtWidgets.QListWidgetItem(xx[i])
+                            self.listWidgetB.addItem(item)
+                    if (~self.loadDataButtonB.isEnabled()):
+                        self.loadDataButtonB.setEnabled(True)
+            except:
+                with self.WaitCursor():
+                    if fname[0]:
+                        self.listWidgetB.clear()
+                        self.dicomB = NiftiClass()
+                        xx = self.dicomB.DicomSelect(fname)
+                        for i in range(len(xx)):
+                            item = QtWidgets.QListWidgetItem(xx[i])
+                            self.listWidgetB.addItem(item)
+                    if (~self.loadDataButtonB.isEnabled()):
+                        self.loadDataButtonB.setEnabled(True)
         except:
-            with self.WaitCursor():
-                if fname[0]:
-                    self.listWidgetB.clear()
-                    self.dicomB = NiftiClass()
-                    xx = self.dicomB.DicomSelect(fname)
-                    for i in range(len(xx)):
-                        item = QtWidgets.QListWidgetItem(xx[i])
-                        self.listWidgetB.addItem(item)
-                if (~self.loadDataButtonB.isEnabled()):
-                    self.loadDataButtonB.setEnabled(True)
+            time.sleep(0.001)
 
     def LoadData(self):
         try:
-            value = int(self.listWidget.currentItem().text()[0:2])
-            with self.WaitCursor():
-                self.dicom.DicomRead(value, 1)
-                # self.dicom.dicomSize=np.shape(self.dicom.dicomData)
-                self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
-                                  int(self.dicom.dicomSizePixel[2] / 2))
-                self.dicom.zeroPos = (0, 0, 0)
-                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
-                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
-                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+            try:
+                value = int(self.listWidget.currentItem().text()[0:2])
+                with self.WaitCursor():
+                    self.dicom.DicomRead(value, 1)
+                    # self.dicom.dicomSize=np.shape(self.dicom.dicomData)
+                    self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
+                                      int(self.dicom.dicomSizePixel[2] / 2))
+                    self.dicom.zeroPos = (0, 0, 0)
+                    self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                    self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                    self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
 
+            except:
+                value = self.listWidget.currentItem().text()
+                with self.WaitCursor():
+                    self.dicom.DicomRead(value)
+
+                    # for i in range(self.dicom.dicomSizePixel[0]):
+                    #     self.dicom.dicomData[i, :, :] = np.flip(self.dicom.dicomData[i, :, :], axis=1)
+                    # self.dicom.dicomDataRaw = copy.deepcopy(self.dicom.dicomData)
+
+                    self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
+                                      int(self.dicom.dicomSizePixel[2] / 2))
+                    self.dicom.zeroPos = (0, 0, 0)
+                    self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                    self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                    self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
         except:
-            value = self.listWidget.currentItem().text()
-            with self.WaitCursor():
-                self.dicom.DicomRead(value)
-
-                # for i in range(self.dicom.dicomSizePixel[0]):
-                #     self.dicom.dicomData[i, :, :] = np.flip(self.dicom.dicomData[i, :, :], axis=1)
-                # self.dicom.dicomDataRaw = copy.deepcopy(self.dicom.dicomData)
-
-                self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
-                                  int(self.dicom.dicomSizePixel[2] / 2))
-                self.dicom.zeroPos = (0, 0, 0)
-                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
-                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
-                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
-
-        #     msg = QtWidgets.QMessageBox()
-        #     msg.setIcon(QtWidgets.QMessageBox.Information)
-        #     msg.setWindowTitle("Error")
-        #     msg.setText('Dicom Series is not correct')
-        #     msg.exec_()
+            # time.sleep(0.001)
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)
+            msg.setWindowTitle("Error")
+            msg.setText('Dicom Series is not correct')
+            msg.exec_()
 
     def LoadDataB(self):
         try:
-            value = int(self.listWidgetB.currentItem().text()[0:2])
-            with self.WaitCursor():
-                self.dicomB.DicomRead(value, 1)
+            try:
+                value = int(self.listWidgetB.currentItem().text()[0:2])
+                with self.WaitCursor():
+                    self.dicomB.DicomRead(value, 1)
 
-                # self.dicomB.dicomSize=np.shape(self.dicomB.dicomData)
-                self.dicomB.pos = (int(self.dicomB.dicomSizePixel[0] / 2), int(self.dicomB.dicomSizePixel[1] / 2),
-                                   int(self.dicomB.dicomSizePixel[2] / 2))
-                self.dicomB.zeroPos = (0, 0, 0)
-                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
-                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
-                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
+                    # self.dicomB.dicomSize=np.shape(self.dicomB.dicomData)
+                    self.dicomB.pos = (int(self.dicomB.dicomSizePixel[0] / 2), int(self.dicomB.dicomSizePixel[1] / 2),
+                                       int(self.dicomB.dicomSizePixel[2] / 2))
+                    self.dicomB.zeroPos = (0, 0, 0)
+                    self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
+                    self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
+                    self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
 
+            except:
+                value = self.listWidget.currentItem().text()
+                with self.WaitCursor():
+                    self.dicomB.DicomRead(value)
+
+                    self.dicomB.pos = (int(self.dicomB.dicomSizePixel[0] / 2), int(self.dicomB.dicomSizePixel[1] / 2),
+                                      int(self.dicomB.dicomSizePixel[2] / 2))
+                    self.dicomB.zeroPos = (0, 0, 0)
+                    self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
+                    self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
+                    self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
         except:
-            value = self.listWidget.currentItem().text()
-            with self.WaitCursor():
-                self.dicomB.DicomRead(value)
-
-                self.dicomB.pos = (int(self.dicomB.dicomSizePixel[0] / 2), int(self.dicomB.dicomSizePixel[1] / 2),
-                                  int(self.dicomB.dicomSizePixel[2] / 2))
-                self.dicomB.zeroPos = (0, 0, 0)
-                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
-                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
-                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
-            # msg = QtWidgets.QMessageBox()
-            # msg.setIcon(QtWidgets.QMessageBox.Information)
-            # msg.setWindowTitle("Error")
-            # msg.setText('Dicom Series is not correct')
-            # msg.exec_()
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)
+            msg.setWindowTitle("Error")
+            msg.setText('Dicom Series is not correct')
+            msg.exec_()
 
     def ShowDicom(self, ct, pos, frame):
         diSize = np.shape(ct)
@@ -967,7 +1148,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                 plt.show()
 
     def swap12(self):
-        if self.MRIorCTs.currentIndex() == 1:
+        if self.MRIorCT.currentIndex() == 1:
             if self.dicom is not None:
                 self.dicom.dicomData = np.transpose(self.dicom.dicomData, (1, 0, 2))
                 self.dicom.ct1 = np.transpose(self.dicom.ct1, (1, 0, 2))
@@ -977,7 +1158,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                 self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
                 self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
                 self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
-        if self.MRIorCTs.currentIndex() == 2:
+        if self.MRIorCT.currentIndex() == 2:
             if self.dicomB is not None:
                 print('ok')
                 self.dicomB.dicomData = np.transpose(self.dicomB.dicomData, (1, 0, 2))
@@ -990,7 +1171,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                 self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
 
     def swap13(self):
-        if self.MRIorCTs.currentIndex() == 1:
+        if self.MRIorCT.currentIndex() == 1:
             if self.dicom is not None:
                 self.dicom.dicomData = np.transpose(self.dicom.dicomData, (2, 1, 0))
                 self.dicom.ct1 = np.transpose(self.dicom.ct1, (2, 1, 0))
@@ -1000,7 +1181,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                 self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
                 self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
                 self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
-        if self.MRIorCTs.currentIndex() == 2:
+        if self.MRIorCT.currentIndex() == 2:
             if self.dicomB is not None:
                 self.dicomB.dicomData = np.transpose(self.dicomB.dicomData, (2, 1, 0))
                 self.dicomB.ct1 = np.transpose(self.dicomB.ct1, (2, 1, 0))
@@ -1012,7 +1193,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                 self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
 
     def swap23(self):
-        if self.MRIorCTs.currentIndex() == 1:
+        if self.MRIorCT.currentIndex() == 1:
             if self.dicom is not None:
                 self.dicom.dicomData = np.transpose(self.dicom.dicomData, (0, 2, 1))
                 self.dicom.ct1 = np.transpose(self.dicom.ct1, (0, 2, 1))
@@ -1022,7 +1203,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                 self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
                 self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
                 self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
-        if self.MRIorCTs.currentIndex() == 2:
+        if self.MRIorCT.currentIndex() == 2:
             if self.dicomB is not None:
                 self.dicomB.dicomData = np.transpose(self.dicomB.dicomData, (0, 2, 1))
                 self.dicomB.ct1 = np.transpose(self.dicomB.ct1, (0, 2, 1))
@@ -1080,6 +1261,177 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                 self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
                 self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
                 self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
+
+
+    def shift_Hu(self):
+        if self.MRIorCTsh.currentIndex() == 1:
+            if self.dicom is not None:
+                temp = np.zeros(self.dicom.dicomSizePixel)
+                temp[:,:-1,:] = self.dicom.dicomData[:,1:,:]
+                self.dicom.dicomData = deepcopy(temp)
+                self.dicom.ct1 = deepcopy(temp)
+                del temp
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+        if self.MRIorCTsh.currentIndex() == 2:
+            if self.dicomB is not None:
+                temp = np.zeros(self.dicomB.dicomSizePixel)
+                temp[:,:-1,:] = self.dicomB.dicomData[:,1:,:]
+                self.dicomB.dicomData = deepcopy(temp)
+                self.dicomB.ct1 = deepcopy(temp)
+                del temp
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
+
+    def shift_Hd(self):
+        if self.MRIorCTsh.currentIndex() == 1:
+            if self.dicom is not None:
+                temp = np.zeros(self.dicom.dicomSizePixel)
+                temp[:,1:,:] = self.dicom.dicomData[:,:-1,:]
+                self.dicom.dicomData = deepcopy(temp)
+                self.dicom.ct1 = deepcopy(temp)
+                del temp
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+        if self.MRIorCTsh.currentIndex() == 2:
+            if self.dicomB is not None:
+                temp = np.zeros(self.dicomB.dicomSizePixel)
+                temp[:,1:,:] = self.dicomB.dicomData[:,:-1,:]
+                self.dicomB.dicomData = deepcopy(temp)
+                self.dicomB.ct1 = deepcopy(temp)
+                del temp
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
+
+    def shift_Su(self):
+        if self.MRIorCTsh.currentIndex() == 1:
+            if self.dicom is not None:
+                temp = np.zeros(self.dicom.dicomSizePixel)
+                temp[:-1,:,:] = self.dicom.dicomData[1:,:,:]
+                self.dicom.dicomData = deepcopy(temp)
+                self.dicom.ct1 = deepcopy(temp)
+                del temp
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+        if self.MRIorCTsh.currentIndex() == 2:
+            if self.dicomB is not None:
+                temp = np.zeros(self.dicomB.dicomSizePixel)
+                temp[:-1,:,:] = self.dicomB.dicomData[1:,:,:]
+                self.dicomB.dicomData = deepcopy(temp)
+                self.dicomB.ct1 = deepcopy(temp)
+                del temp
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
+
+    def shift_Sd(self):
+        if self.MRIorCTsh.currentIndex() == 1:
+            if self.dicom is not None:
+                temp = np.zeros(self.dicom.dicomSizePixel)
+                temp[1:,:,:] = self.dicom.dicomData[:-1,:,:]
+                self.dicom.dicomData = deepcopy(temp)
+                self.dicom.ct1 = deepcopy(temp)
+                del temp
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+        if self.MRIorCTsh.currentIndex() == 2:
+            if self.dicomB is not None:
+                temp = np.zeros(self.dicomB.dicomSizePixel)
+                temp[1:,:,:] = self.dicomB.dicomData[:-1,:,:]
+                self.dicomB.dicomData = deepcopy(temp)
+                self.dicomB.ct1 = deepcopy(temp)
+                del temp
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
+
+    def shift_Cu(self):
+        if self.MRIorCTsh.currentIndex() == 1:
+            if self.dicom is not None:
+                temp = np.zeros(self.dicom.dicomSizePixel)
+                temp[:,:,:-1] = self.dicom.dicomData[:,:,1:]
+                self.dicom.dicomData = deepcopy(temp)
+                self.dicom.ct1 = deepcopy(temp)
+                del temp
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+        if self.MRIorCTsh.currentIndex() == 2:
+            if self.dicomB is not None:
+                temp = np.zeros(self.dicomB.dicomSizePixel)
+                temp[:,:,:-1] = self.dicomB.dicomData[:,:,1:]
+                self.dicomB.dicomData = deepcopy(temp)
+                self.dicomB.ct1 = deepcopy(temp)
+                del temp
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
+
+    def shift_Cd(self):
+        if self.MRIorCTsh.currentIndex() == 1:
+            if self.dicom is not None:
+                temp = np.zeros(self.dicom.dicomSizePixel)
+                temp[:,:,1:] = self.dicom.dicomData[:,:,:-1]
+                self.dicom.dicomData = deepcopy(temp)
+                self.dicom.ct1 = deepcopy(temp)
+                del temp
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+        if self.MRIorCTsh.currentIndex() == 2:
+            if self.dicomB is not None:
+                temp = np.zeros(self.dicomB.dicomSizePixel)
+                temp[:,:,1:] = self.dicomB.dicomData[:,:,:-1]
+                self.dicomB.dicomData = deepcopy(temp)
+                self.dicomB.ct1 = deepcopy(temp)
+                del temp
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)    
+
+    def crop_preview(self):
+        if self.MRIorCTsh.currentIndex() == 1:
+            if self.dicom is not None:
+                self.cropped = np.zeros((self.dicom.dicomSizePixel[0]-self.spinboxch0.value()-self.spinboxch3.value(),self.dicom.dicomSizePixel[1]-self.spinboxch1.value()-self.spinboxch4.value(),self.dicom.dicomSizePixel[2]-self.spinboxch2.value()-self.spinboxch5.value()))
+                self.cropped = self.dicom.dicomData[self.spinboxch0.value():self.dicom.dicomSizePixel[0]-self.spinboxch3.value(),self.spinboxch1.value():self.dicom.dicomSizePixel[1]-self.spinboxch4.value(),self.spinboxch2.value():self.dicom.dicomSizePixel[2]-self.spinboxch5.value()]
+                pos = (np.shape(self.cropped)[0]//2, np.shape(self.cropped)[1]//2, np.shape(self.cropped)[2]//2)
+                self.ShowDicom(self.cropped, pos, 0)
+                self.ShowDicom(self.cropped, pos, 1)
+                self.ShowDicom(self.cropped, pos, 2)
+        if self.MRIorCTsh.currentIndex() == 2:
+            if self.dicomB is not None:
+                self.cropped = np.zeros((self.dicomB.dicomSizePixel[0]-self.spinboxch0.value()-self.spinboxch3.value(),self.dicomB.dicomSizePixel[1]-self.spinboxch1.value()-self.spinboxch4.value(),self.dicomB.dicomSizePixel[2]-self.spinboxch2.value()-self.spinboxch5.value()))
+                self.cropped = self.dicomB.dicomData[self.spinboxch0.value():self.dicomB.dicomSizePixel[0]-self.spinboxch3.value(),self.spinboxch1.value():self.dicomB.dicomSizePixel[1]-self.spinboxch4.value(),self.spinboxch2.value():self.dicomB.dicomSizePixel[2]-self.spinboxch5.value()]
+                pos = (np.shape(self.cropped)[0]//2, np.shape(self.cropped)[1]//2, np.shape(self.cropped)[2]//2)
+                self.ShowDicomB(self.cropped, pos, 0)
+                self.ShowDicomB(self.cropped, pos, 1)
+                self.ShowDicomB(self.cropped, pos, 2)
+
+    def Crop(self):
+        if self.MRIorCTsh.currentIndex() == 1:
+            if self.dicom is not None:
+                self.dicom.dicomData = deepcopy(self.cropped)
+                self.dicom.ct1 = deepcopy(self.cropped)
+                self.dicom.dicomSizePixel = self.dicom.dicomData.shape
+                self.dicom.pos = (self.dicom.dicomSizePixel[0]//2, self.dicom.dicomSizePixel[1]//2, self.dicom.dicomSizePixel[2]//2)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+        if self.MRIorCTsh.currentIndex() == 2:
+            if self.dicomB is not None:
+                self.dicomB.dicomData = deepcopy(self.cropped)
+                self.dicomB.ct1 = deepcopy(self.cropped)
+                self.dicomB.dicomSizePixel = self.dicomB.dicomData.shape
+                self.dicomB.pos = (self.dicomB.dicomSizePixel[0]//2, self.dicomB.dicomSizePixel[1]//2, self.dicomB.dicomSizePixel[2]//2)
+                self.ShowDicom(self.dicomB.dicomData, self.dicomB.pos, 0)
+                self.ShowDicom(self.dicomB.dicomData, self.dicomB.pos, 1)
+                self.ShowDicom(self.dicomB.dicomData, self.dicomB.pos, 2)
 
     def checked_box1(self):
         if (self.dicom is not None) and (self.dicomB is not None):
@@ -1305,74 +1657,6 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                     self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 0)
                     self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 1)
                     self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 2)
-
-
-
-    # def combine(self):
-    #     num_points = len(self.points_a)
-    #     K = np.zeros((num_points, num_points))
-
-    #     for i in range(num_points):
-    #         for j in range(num_points):
-    #             K[i][j] = sum(np.subtract(self.points_a[i], self.points_b[j]) ** 2)
-    #             K[j][i] = K[i][j]
-
-    #     K = np.maximum(K, 1e-320)
-
-    #     K = np.sqrt(K)
-
-    #     P = np.hstack((np.ones((num_points, 1)), self.points_a))
-
-    #     a1 = np.hstack((K, P))
-    #     a2 = np.hstack((np.transpose(P), np.zeros((4, 4))))
-
-    #     L = np.vstack((a1, a2))
-
-    #     param = np.matmul(np.linalg.pinv(L), np.vstack((self.points_b, np.zeros((4, 3)))))
-
-    #     #####################################################################################
-
-    #     # new_volume = np.zeros_like(self.dicomB.dicomData)
-
-    #     K = np.zeros((len(self.dicomB.dicomData), num_points))
-
-    #     gx = self.dicomB.dicomData[:][0]
-    #     gy = self.dicomB.dicomData[:][1]
-    #     gz = self.dicomB.dicomData[:][2]
-
-    #     for i in range(num_points):
-    #         K[:][i] = (gx - self.points_a[i][0]) ** 2 + (gy - self.points_a[i][1]) ** 2 + (gz - self.points_a[i][2]) ** 2
-
-    #     K = np.maximum(K, 1e-320)
-    #     K = np.sqrt(K)
-
-    #     P = np.hstack((np.hstack((np.hstack((np.ones((len(self.dicomB.dicomData), 1)), gx)), gy)), gz))
-
-    #     L = np.hstack((K, P))
-
-    #     new_volume = np.matmul(L, param)
-    #     new_volume[:][0] = np.round(new_volume[:][0] * (1e3)) * (1e-3)
-
-    #     self.dicomR = DicomClass()
-    #     self.dicomR.dicomData = new_volume  #
-    #     self.dicomR.ct1 = new_volume  #
-    #     self.dicomR.dicomSizePixel = new_volume.shape  #
-    #     self.dicomR.scaleM = self.dicom.scaleM
-    #     self.dicomR.scale = self.dicom.scale
-    #     self.dicomR.pos = (10, 10, 10)
-    #     self.dicomR.zeroPos = (0, 0, 0)
-    #     # self.dicomR.dicomSizeMM = np.maximum(self.dicom.dicomSizeMM,self.dicomB.dicomSizeMM)
-    #     self.dicomR.dicomSizeMM = new_volume.shape  #
-    #     dicomRtemp = self.dicomR
-    #     Settings.myList.append(dicomRtemp)
-
-    #     self.dicomR.pos = (int(self.dicomR.dicomSizePixel[0] / 2), int(self.dicomR.dicomSizePixel[1] / 2),
-    #                        int(self.dicomR.dicomSizePixel[2] / 2))
-    #     self.dicomR.zeroPos = (0, 0, 0)
-
-    #     self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 0)
-    #     self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 1)
-    #     self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 2)
 
 
     def sendMain(self):
