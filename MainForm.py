@@ -821,6 +821,9 @@ class MainForm(QtWidgets.QMainWindow):
                         self.dicom = pickle.load(handle)
                         # self.dicom=DicomClass()
                         # self.dicom = unpickler.load()
+                        # print(np.shape(self.dicom))
+                        # print(self.dicom)
+                        # print('----------------------------')
                         self.setZeroButton.setEnabled(True)
                         self.resliceButton.setEnabled(True)
                     if self.dicom.isResliceExist:

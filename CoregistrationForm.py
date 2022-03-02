@@ -339,12 +339,14 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         self.combineButton = QtWidgets.QPushButton("&Coregistration", self)
         self.combineButton.resize(160, 40)
         self.combineButton.move(745, 940)
+        self.combineButton.setStyleSheet('QPushButton {color: green;}')
         self.combineButton.clicked.connect(self.combine)
 
         # button
         self.sendMainButton = QtWidgets.QPushButton("&Send To MainForm", self)
         self.sendMainButton.resize(160, 40)
         self.sendMainButton.move(1175, 940)
+        self.sendMainButton.setStyleSheet('QPushButton {color: #3333AA;}')
         self.sendMainButton.clicked.connect(self.sendMain)
 
         font = QtGui.QFont()
@@ -580,12 +582,12 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         # self.spinbox2.setMaximum(100)
         # self.spinbox2.setValue(0)
 
-        shiftMenu = QtWidgets.QAction('Shift', self)
+        shiftMenu = QtWidgets.QAction('Manual-Registration', self)
         # shiftMenu.setCheckable(True)
         shiftMenu.setStatusTip('shift')
         shiftMenu.triggered.connect(self.ShiftMenu)
 
-        pointsMenu = QtWidgets.QAction('Registration', self)
+        pointsMenu = QtWidgets.QAction('Automatic-Registration', self)
         # pointsMenu.setCheckable(True)
         pointsMenu.setStatusTip('registration')
         pointsMenu.triggered.connect(self.PointSelectionMenu)

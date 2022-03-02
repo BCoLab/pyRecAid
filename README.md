@@ -7,11 +7,11 @@ This is the git page for Python Recording Aid, pyRecAid, an open source utility 
 Available for Windows and Linux machines.
 
 Tested platforms:
-- Windows 10;
-- Ubuntu 20;
-- Ubuntu 18;
-- Ubuntu 16.
-- MacOS.
+- Windows 10
+- Ubuntu 20
+- Ubuntu 18
+- Ubuntu 16
+- MacOs
 
 # Overview
 ![](./Resource/image1.png)
@@ -28,11 +28,13 @@ files → here you will see the manual.pdf containing user guide.
 
 Prior to the installation you should have a distribution of Python3 interpreter installed on your system (we recommend the anaconda distribution). Instructions on how to run the program methods on Windows and Linux machines are described below:
 
+#### Installing anaconda
+Download the anaconda from [here](https://www.anaconda.com/products/individual) for your operating system. Then install then application and follow bellow procedure to install software requirements.
  
-For Windows users:
+#### For Windows users:
 After installation of Python3, open command prompt or the anaconda prompt (depending on your Python3 distro and path settings) and type the following commands at the prompt (case sensitive):
 ```sh
->> pip install scipy dicom PyQt5 matplotlib OpenCV-Python scikit-image transforms3d dill
+>> pip install scipy dicom PyQt5 matplotlib OpenCV-Python scikit-image transforms3d dill nibabel torch torchvision torchaudio
 ```
 
 -	If you have python2 in your environment then you should type pip3 instead of pip in the above command since in that case pip defaults to Python2. 
@@ -40,13 +42,13 @@ It takes some time so be patient and wait for the transactions to finish and the
 ```sh
 >> conda install -c clinicalgraphics gdcm
 ```
--	In case you do not want to install anaconda, you can download the GDCM library at:	https://sourceforge.net/p/gdcm/gdcm/
+-	In case you do not want to install anaconda, you can download the GDCM library at [here](https://sourceforge.net/p/gdcm/gdcm/).
 
-For Linux users:
+#### For Linux users:
 Linux machines contain a system Python3. It is highly recommended that you don’t install the program using the system Python3. You are better to install a virtual environment by venv or conda (in case you have anaconda or miniconda) and then follow the instructions below.
 Open a terminal with your desired python3 environment activated and type in the following line:
 ```sh
->> pip install scipy==1.2.0 dicom PyQt5 matplotlib OpenCV-Python scikit-image transforms3d dill
+>> pip install scipy==1.2.0 dicom PyQt5 matplotlib OpenCV-Python scikit-image transforms3d dill nibabel torch==1.10.2+cpu torchvision==0.11.3+cpu torchaudio==0.10.2+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
 ```
 -	If you have python2 in your environment then you should type pip3 instead of pip in the above command since in that case pip defaults to Python2. 
 -	It takes some time so be patient and wait for the transactions to finish and then enter:
@@ -54,6 +56,26 @@ Open a terminal with your desired python3 environment activated and type in the 
 >> conda install -c clinicalgraphics gdcm
 ```
 -	In case you do not want to install anaconda, you can download the GDCM library at:	https://sourceforge.net/p/gdcm/gdcm/
+
+#### yml file installation
+Installing from yml file is the easiest way to execute the software. To after installing the anaconda open a terminal (Linux/Mac) or anaconda command prompt (Windows) and create a new environment by running:
+```sh
+>> conda env create -f environment.yml
+```
+By running this command a new environment will be created under the name "pyRecAid". By executing the bellow command you can see the existing environments in your device.
+```sh
+>> conda env list
+```
+If the installation process runs successfully, you should be able to see the "pyRecAid" environment under the exported list.  After installing successfully, you have to activate the environment by running:
+```sh
+>> conda activate pyRecAid
+```
+After activating the environment, go to the cloned code directory on your system and run:
+```sh
+>> python3 Main.py
+```
+Thereafter, the software starts and ready to be used.
+
 
 # Running the program
 Redirect to the %directory of downloaded files%/src/and run Main.py
