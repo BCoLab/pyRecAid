@@ -73,7 +73,7 @@ Suggestions in this sections can be incorporated into the future editions of the
 If pyRecAid helps your research, please cite our paper in your publications.
 
 ```
-@article{Heydari_2022,
+@article{Rezayat_2022,
 	doi = {},
 	url = {},
 	year = 2022,
@@ -81,7 +81,7 @@ If pyRecAid helps your research, please cite our paper in your publications.
 	publisher = {Elsevier},
 	volume = {},
 	number = {},
-	author = {Ehsan Rezayat, Hamed Heidari-Gorji, Farzad Shayanfar, Pouya Narimani, Abolhasan Ertiaei, Mohammad-Reza A.
+	author = {Ehsan Rezayat, Hamed Heidari-Gorji, Pouya Narimani, Farzad Shayanfar, Jalaledin Noroozi, Abolhasan Ertiaei, Mohammad-Reza A.
 	Dehaqani},
 	title = {A Multimodal Imaging-guided Software for Access to Primate Brains},
 	journal = {Heliyon}
