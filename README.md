@@ -23,8 +23,8 @@ All the requirements are downloaded from python repositories (PyPI and conda cha
 # Installation Guide
 Simply download or clone the directory to a desired location on your local system (extract the .zip file in case of downloading). Then redirect to this folder on your system to find the following files and folders:
 
-src → here you will see the program scripts including the main method […].
-files → here you will see the manual.pdf containing user guide.
+main directory → here you will see the program scripts including the main method […].
+Files → here you will see the manual.pdf containing user guide and the yml file for conda environment.
 
 Prior to the installation you should have a distribution of Python3 interpreter installed on your system (we recommend the anaconda distribution). Instructions on how to run the program methods on Windows and Linux machines are described below:
 
