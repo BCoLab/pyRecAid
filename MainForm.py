@@ -127,17 +127,17 @@ class MainForm(QtWidgets.QMainWindow):
         # self.spinbox0.setValue(0)
 
         self.spinboxLabel1 = QtWidgets.QLabel("AP Angle:", self.RgroupBox)
-        self.spinboxLabel1.move(5, 25)
+        self.spinboxLabel1.move(5, 30)
         self.spinbox1 = QtWidgets.QSpinBox(self.RgroupBox)
-        self.spinbox1.move(80, 25)
+        self.spinbox1.move(65, 25)
         self.spinbox1.setMinimum(-180)
         self.spinbox1.setMaximum(180)
         self.spinbox1.setValue(0)
 
         self.spinboxLabel2 = QtWidgets.QLabel("ML Angle:", self.RgroupBox)
-        self.spinboxLabel2.move(130, 25)
+        self.spinboxLabel2.move(135, 30)
         self.spinbox2 = QtWidgets.QSpinBox(self.RgroupBox)
-        self.spinbox2.move(215, 25)
+        self.spinbox2.move(200, 25)
         self.spinbox2.setMinimum(-180)
         self.spinbox2.setMaximum(180)
         self.spinbox2.setValue(0)
@@ -1046,6 +1046,9 @@ class MainForm(QtWidgets.QMainWindow):
         a2 = ct[:, :, pos[2]]
 
         a0 = cv2.rotate(a0, cv2.ROTATE_180)
+
+        # print(self.dicom.scaleM)
+        # print('---------------------------')
 
         # print(ct.min(), ct.max())
 

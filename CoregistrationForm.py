@@ -83,7 +83,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
 
         # flip & swap region
         self.flipswapReg = QtWidgets.QGroupBox('&Flip and &Swap', self)
-        self.flipswapReg.move(67, 850)
+        self.flipswapReg.move(67, 830)
         self.flipswapReg.resize(266, 150)
         self.flipswapReg.hide()
 
@@ -178,9 +178,9 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         # # end of region
 
         # Shifting region
-        self.shift = QtWidgets.QGroupBox('&Shift and &Crop', self)
+        self.shift = QtWidgets.QGroupBox('&Shift and &Rotation', self)
         self.shift.move(67, 550)
-        self.shift.resize(266, 260)
+        self.shift.resize(266, 235)
         self.shift.hide()
 
         # Pouya Box
@@ -232,65 +232,115 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         self.shift_d.move(184, 110)
         self.shift_d.clicked.connect(self.shift_Cd)
 
+        self.spinboxLabel1 = QtWidgets.QLabel("AP Angle:", self.shift)
+        self.spinboxLabel1.move(5, 165)
+        self.spinbox1 = QtWidgets.QSpinBox(self.shift)
+        self.spinbox1.move(65, 160)
+        self.spinbox1.setMinimum(-180)
+        self.spinbox1.setMaximum(180)
+        self.spinbox1.setValue(0)
+
+        self.spinboxLabel2 = QtWidgets.QLabel("ML Angle:", self.shift)
+        self.spinboxLabel2.move(135, 165)
+        self.spinbox2 = QtWidgets.QSpinBox(self.shift)
+        self.spinbox2.move(200, 160)
+        self.spinbox2.setMinimum(-180)
+        self.spinbox2.setMaximum(180)
+        self.spinbox2.setValue(0)
+
+        # button
+        self.resliceButton = QtWidgets.QPushButton("Rotation preview", self.shift)
+        self.resliceButton.move(10, 195)
+        self.resliceButton.resize(115, 30)
+        self.resliceButton.clicked.connect(self.Rotation_preview)
+
+        # button
+        self.resliceButton = QtWidgets.QPushButton("Rotation", self.shift)
+        self.resliceButton.move(142, 195)
+        self.resliceButton.resize(115, 30)
+        self.resliceButton.clicked.connect(self.Rotation)
+
+        # end of region
+
+
+        # Crop region
+        self.cropreg = QtWidgets.QGroupBox('&Crop', self)
+        self.cropreg.move(67, 830)
+        self.cropreg.resize(266, 170)
+        self.cropreg.hide()
+
+        # Pouya Box
+        self.my_box2 = QtWidgets.QLabel("Series Selection:", self.cropreg)
+        self.my_box2.move(10, 30)
+        self.my_box2.resize(150, 30)
+
+        # Pouya list
+        self.MRIorCTcr = QtWidgets.QComboBox(self.cropreg)
+        self.MRIorCTcr.addItem("Select Series")
+        self.MRIorCTcr.addItem("First Series")
+        self.MRIorCTcr.addItem("Second Series")
+        self.MRIorCTcr.move(130, 30)
+        self.MRIorCTcr.resize(130, 30)
+
         # spinbox
-        self.spinboxLabelch0 = QtWidgets.QLabel("Ht:", self.shift)
-        self.spinboxLabelch0.move(10, 160)
-        self.spinboxch0 = QtWidgets.QSpinBox(self.shift)
-        self.spinboxch0.move(35, 155)
+        self.spinboxLabelch0 = QtWidgets.QLabel("Ht:", self.cropreg)
+        self.spinboxLabelch0.move(10, 70)
+        self.spinboxch0 = QtWidgets.QSpinBox(self.cropreg)
+        self.spinboxch0.move(35, 65)
         self.spinboxch0.setMinimum(0)
-        self.spinboxch0.setMaximum(20)
+        self.spinboxch0.setMaximum(100)
         self.spinboxch0.setValue(0)
 
-        self.spinboxLabelch1 = QtWidgets.QLabel("St:", self.shift)
-        self.spinboxLabelch1.move(95, 160)
-        self.spinboxch1 = QtWidgets.QSpinBox(self.shift)
-        self.spinboxch1.move(120, 155)
+        self.spinboxLabelch1 = QtWidgets.QLabel("St:", self.cropreg)
+        self.spinboxLabelch1.move(95, 70)
+        self.spinboxch1 = QtWidgets.QSpinBox(self.cropreg)
+        self.spinboxch1.move(120, 65)
         self.spinboxch1.setMinimum(0)
-        self.spinboxch1.setMaximum(20)
+        self.spinboxch1.setMaximum(100)
         self.spinboxch1.setValue(0)
 
-        self.spinboxLabelch2 = QtWidgets.QLabel("Ct:", self.shift)
-        self.spinboxLabelch2.move(180, 160)
-        self.spinboxch2 = QtWidgets.QSpinBox(self.shift)
-        self.spinboxch2.move(205, 155)
+        self.spinboxLabelch2 = QtWidgets.QLabel("Ct:", self.cropreg)
+        self.spinboxLabelch2.move(180, 70)
+        self.spinboxch2 = QtWidgets.QSpinBox(self.cropreg)
+        self.spinboxch2.move(205, 65)
         self.spinboxch2.setMinimum(0)
-        self.spinboxch2.setMaximum(20)
+        self.spinboxch2.setMaximum(100)
         self.spinboxch2.setValue(0)
 
-        self.spinboxLabelch3 = QtWidgets.QLabel("Hd:", self.shift)
-        self.spinboxLabelch3.move(10, 185)
-        self.spinboxch3 = QtWidgets.QSpinBox(self.shift)
-        self.spinboxch3.move(35, 180)
+        self.spinboxLabelch3 = QtWidgets.QLabel("Hd:", self.cropreg)
+        self.spinboxLabelch3.move(10, 95)
+        self.spinboxch3 = QtWidgets.QSpinBox(self.cropreg)
+        self.spinboxch3.move(35, 90)
         self.spinboxch3.setMinimum(0)
-        self.spinboxch3.setMaximum(20)
+        self.spinboxch3.setMaximum(100)
         self.spinboxch3.setValue(0)
 
-        self.spinboxLabelch4 = QtWidgets.QLabel("Sd:", self.shift)
-        self.spinboxLabelch4.move(95, 185)
-        self.spinboxch4 = QtWidgets.QSpinBox(self.shift)
-        self.spinboxch4.move(120, 180)
+        self.spinboxLabelch4 = QtWidgets.QLabel("Sd:", self.cropreg)
+        self.spinboxLabelch4.move(95, 95)
+        self.spinboxch4 = QtWidgets.QSpinBox(self.cropreg)
+        self.spinboxch4.move(120, 90)
         self.spinboxch4.setMinimum(0)
-        self.spinboxch4.setMaximum(20)
+        self.spinboxch4.setMaximum(100)
         self.spinboxch4.setValue(0)
 
-        self.spinboxLabelch5 = QtWidgets.QLabel("Cd:", self.shift)
-        self.spinboxLabelch5.move(180, 185)
-        self.spinboxch5 = QtWidgets.QSpinBox(self.shift)
-        self.spinboxch5.move(205, 180)
+        self.spinboxLabelch5 = QtWidgets.QLabel("Cd:", self.cropreg)
+        self.spinboxLabelch5.move(180, 95)
+        self.spinboxch5 = QtWidgets.QSpinBox(self.cropreg)
+        self.spinboxch5.move(205, 90)
         self.spinboxch5.setMinimum(0)
-        self.spinboxch5.setMaximum(20)
+        self.spinboxch5.setMaximum(100)
         self.spinboxch5.setValue(0)
 
         # button pouya
-        self.croppreview = QtWidgets.QPushButton("Crop preview", self.shift)
+        self.croppreview = QtWidgets.QPushButton("Crop preview", self.cropreg)
         self.croppreview.resize(110, 30)
-        self.croppreview.move(10, 220)
+        self.croppreview.move(10, 130)
         self.croppreview.clicked.connect(self.crop_preview)
 
         # button pouya
-        self.crop = QtWidgets.QPushButton("Crop", self.shift)
+        self.crop = QtWidgets.QPushButton("Crop", self.cropreg)
         self.crop.resize(110, 30)
-        self.crop.move(142, 220)
+        self.crop.move(142, 130)
         self.crop.clicked.connect(self.Crop)
 
         # end of region
@@ -597,6 +647,11 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         flipMenu.setStatusTip('flip & swap')
         flipMenu.triggered.connect(self.FlipMenu)
 
+        cropMenu = QtWidgets.QAction('Crop', self)
+        # cropMenu.setCheckable(True)
+        cropMenu.setStatusTip('crop')
+        cropMenu.triggered.connect(self.CropMenu)
+
         # swapMenu = QtWidgets.QAction('Swap', self)
         # swapMenu.setCheckable(True)
         # swapMenu.setStatusTip('swap')
@@ -617,10 +672,11 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         toolsMenu.addAction(shiftMenu)
         toolsMenu.addAction(pointsMenu)
         toolsMenu.addAction(flipMenu)
+        toolsMenu.addAction(cropMenu)
         # toolsMenu.addAction(swapMenu)
 
         self.Fflag = False
-        # self.Sflag = False
+        self.Crflag = False
         self.Shflag = False
         self.PSflag = False
 
@@ -629,8 +685,20 @@ class CoregistrationForm(QtWidgets.QMainWindow):
             self.flipswapReg.hide()
             self.Fflag = False
         else:
+            self.cropreg.hide()
+            self.Crflag = False
             self.flipswapReg.show()
             self.Fflag = True
+
+    def CropMenu(self):
+        if self.Crflag:
+            self.cropreg.hide()
+            self.Crflag = False
+        else:
+            self.flipswapReg.hide()
+            self.Fflag = False
+            self.cropreg.show()
+            self.Crflag = True
 
     # def SwapMenu(self):
     #     if self.Sflag:
@@ -806,6 +874,9 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         # plt.hist(a0, bins=256)
         # plt.show()
 
+        # print(self.dicom.scaleM)
+        # print('################################')
+
 
         pix0 = self.CreateQPixmap(a0, round(self.dicom.scale[1] * self.dicom.dicomSizePixel[1]),
                                   round(self.dicom.scale[2] * self.dicom.dicomSizePixel[2]), pos[2], pos[1],
@@ -837,6 +908,9 @@ class CoregistrationForm(QtWidgets.QMainWindow):
 
         # plt.hist(a0, bins=256)
         # plt.show()
+
+        # print(self.dicomB.scaleM)
+        # print('---------------------------')
 
 
         pix0 = self.CreateQPixmap(a0, round(self.dicomB.scale[1] * self.dicomB.dicomSizePixel[1]),
@@ -1398,7 +1472,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                 self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)    
 
     def crop_preview(self):
-        if self.MRIorCTsh.currentIndex() == 1:
+        if self.MRIorCTcr.currentIndex() == 1:
             if self.dicom is not None:
                 self.cropped = np.zeros((self.dicom.dicomSizePixel[0]-self.spinboxch0.value()-self.spinboxch3.value(),self.dicom.dicomSizePixel[1]-self.spinboxch1.value()-self.spinboxch4.value(),self.dicom.dicomSizePixel[2]-self.spinboxch2.value()-self.spinboxch5.value()))
                 self.cropped = self.dicom.dicomData[self.spinboxch0.value():self.dicom.dicomSizePixel[0]-self.spinboxch3.value(),self.spinboxch1.value():self.dicom.dicomSizePixel[1]-self.spinboxch4.value(),self.spinboxch2.value():self.dicom.dicomSizePixel[2]-self.spinboxch5.value()]
@@ -1406,7 +1480,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                 self.ShowDicom(self.cropped, pos, 0)
                 self.ShowDicom(self.cropped, pos, 1)
                 self.ShowDicom(self.cropped, pos, 2)
-        if self.MRIorCTsh.currentIndex() == 2:
+        if self.MRIorCTcr.currentIndex() == 2:
             if self.dicomB is not None:
                 self.cropped = np.zeros((self.dicomB.dicomSizePixel[0]-self.spinboxch0.value()-self.spinboxch3.value(),self.dicomB.dicomSizePixel[1]-self.spinboxch1.value()-self.spinboxch4.value(),self.dicomB.dicomSizePixel[2]-self.spinboxch2.value()-self.spinboxch5.value()))
                 self.cropped = self.dicomB.dicomData[self.spinboxch0.value():self.dicomB.dicomSizePixel[0]-self.spinboxch3.value(),self.spinboxch1.value():self.dicomB.dicomSizePixel[1]-self.spinboxch4.value(),self.spinboxch2.value():self.dicomB.dicomSizePixel[2]-self.spinboxch5.value()]
@@ -1416,24 +1490,226 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                 self.ShowDicomB(self.cropped, pos, 2)
 
     def Crop(self):
-        if self.MRIorCTsh.currentIndex() == 1:
+        if self.MRIorCTcr.currentIndex() == 1:
             if self.dicom is not None:
-                self.dicom.dicomData = deepcopy(self.cropped)
-                self.dicom.ct1 = deepcopy(self.cropped)
+                try:
+                    self.dicom.dicomData = deepcopy(self.cropped)
+                    self.dicom.ct1 = deepcopy(self.cropped)
+                except:
+                    self.cropped = np.zeros((self.dicom.dicomSizePixel[0]-self.spinboxch0.value()-self.spinboxch3.value(),self.dicom.dicomSizePixel[1]-self.spinboxch1.value()-self.spinboxch4.value(),self.dicom.dicomSizePixel[2]-self.spinboxch2.value()-self.spinboxch5.value()))
+                    self.cropped = self.dicom.dicomData[self.spinboxch0.value():self.dicom.dicomSizePixel[0]-self.spinboxch3.value(),self.spinboxch1.value():self.dicom.dicomSizePixel[1]-self.spinboxch4.value(),self.spinboxch2.value():self.dicom.dicomSizePixel[2]-self.spinboxch5.value()]
+                    self.dicom.dicomData = deepcopy(self.cropped)
+                    self.dicom.ct1 = deepcopy(self.cropped)
+
                 self.dicom.dicomSizePixel = self.dicom.dicomData.shape
                 self.dicom.pos = (self.dicom.dicomSizePixel[0]//2, self.dicom.dicomSizePixel[1]//2, self.dicom.dicomSizePixel[2]//2)
                 self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
                 self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
                 self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
-        if self.MRIorCTsh.currentIndex() == 2:
+        if self.MRIorCTcr.currentIndex() == 2:
             if self.dicomB is not None:
-                self.dicomB.dicomData = deepcopy(self.cropped)
-                self.dicomB.ct1 = deepcopy(self.cropped)
+                try:
+                    self.dicomB.dicomData = deepcopy(self.cropped)
+                    self.dicomB.ct1 = deepcopy(self.cropped)
+                except:
+                    self.cropped = np.zeros((self.dicomB.dicomSizePixel[0]-self.spinboxch0.value()-self.spinboxch3.value(),self.dicomB.dicomSizePixel[1]-self.spinboxch1.value()-self.spinboxch4.value(),self.dicomB.dicomSizePixel[2]-self.spinboxch2.value()-self.spinboxch5.value()))
+                    self.cropped = self.dicomB.dicomData[self.spinboxch0.value():self.dicomB.dicomSizePixel[0]-self.spinboxch3.value(),self.spinboxch1.value():self.dicomB.dicomSizePixel[1]-self.spinboxch4.value(),self.spinboxch2.value():self.dicomB.dicomSizePixel[2]-self.spinboxch5.value()]
+                    self.dicomB.dicomData = deepcopy(self.cropped)
+                    self.dicomB.ct1 = deepcopy(self.cropped)
+                
                 self.dicomB.dicomSizePixel = self.dicomB.dicomData.shape
                 self.dicomB.pos = (self.dicomB.dicomSizePixel[0]//2, self.dicomB.dicomSizePixel[1]//2, self.dicomB.dicomSizePixel[2]//2)
-                self.ShowDicom(self.dicomB.dicomData, self.dicomB.pos, 0)
-                self.ShowDicom(self.dicomB.dicomData, self.dicomB.pos, 1)
-                self.ShowDicom(self.dicomB.dicomData, self.dicomB.pos, 2)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 0)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 1)
+                self.ShowDicomB(self.dicomB.dicomData, self.dicomB.pos, 2)
+
+    def computeRotCam_coreg(self, alpha1=0.0, beta1=0.0, gamma1=0.0):
+        alpha = np.deg2rad(alpha1)
+        beta = np.deg2rad(beta1)
+        gamma = np.deg2rad(beta1)
+
+        RX = np.array([[1, 0, 0], [0, np.cos(alpha), -np.sin(alpha)], [0, np.sin(alpha), np.cos(alpha)]])
+        RY = np.array([[np.cos(beta), 0, np.sin(beta)], [0, 1, 0], [-np.sin(beta), 0, np.cos(beta)]])
+        RZ = np.array([[np.cos(gamma), -np.sin(gamma), 0], [np.sin(gamma), np.cos(gamma), 0], [0, 0, 1]])
+        return np.dot(RX, np.dot(RY, RZ))
+
+    def Rotation1(self, inp, a, b, c):
+        tempDicom = scipy.ndimage.rotate(inp, a, axes=(1, 2), reshape=True, output=np.uint8, order=1,
+                                         mode='constant', prefilter=True)
+        tempDicom = scipy.ndimage.rotate(tempDicom, b, axes=(0, 2), reshape=True, output=np.uint8, order=1,
+                                         mode='constant', prefilter=True)
+        tempDicom = scipy.ndimage.rotate(tempDicom, c, axes=(0, 1), reshape=True, output=np.uint8, order=1,
+                                         mode='constant', prefilter=True)
+        return tempDicom
+
+    def Rotation_preview(self):
+        if self.MRIorCTsh.currentIndex() == 1:
+            if self.dicom is not None:
+                a = 0
+                b = self.spinbox1.value()
+                c = self.spinbox2.value()
+
+                # self.dicom.reslice = (a, b, c)
+
+                with self.WaitCursor():
+                    tempDicom = self.dicom.dicomData
+                    tempmap = np.zeros(np.shape(self.dicom.dicomData))
+                    tempmap[self.dicom.zeroPos] = 255
+                    tempDicom = self.Rotation1(tempDicom, a, b, c)
+
+                    tempmap = scipy.ndimage.rotate(tempmap, a, axes=(1, 2), reshape=True, output=np.uint8, order=1,
+                                                   mode='constant', prefilter=True)
+                    tempmap = scipy.ndimage.rotate(tempmap, b, axes=(0, 2), reshape=True, output=np.uint8, order=1,
+                                                   mode='constant', prefilter=True)
+                    tempmap = scipy.ndimage.rotate(tempmap, c, axes=(0, 1), reshape=True, output=np.uint8, order=1,
+                                                   mode='constant', prefilter=True)
+
+                    newzero = (np.where(tempmap == np.max(tempmap))[0][0], np.where(tempmap == np.max(tempmap))[1][0],
+                               np.where(tempmap == np.max(tempmap))[2][0])
+
+                    # newzero = self.dicom.pos
+
+                    cc = np.dot(self.computeRotCam_coreg(a, b, c), self.dicom.zeroPos)
+
+                    pos = (np.shape(tempDicom)[0]//2,np.shape(tempDicom)[1]//2,np.shape(tempDicom)[2]//2)
+
+                    self.rotated = tempDicom
+                    self.rotated_pos = pos
+                    self.rotated_size = np.shape(tempDicom)
+
+                    self.ShowDicom(tempDicom, pos, 0)
+                    self.ShowDicom(tempDicom, pos, 1)
+                    self.ShowDicom(tempDicom, pos, 2)
+
+        elif self.MRIorCTcr.currentIndex() == 2:
+            if self.dicomB is not None:
+                a = 0
+                b = self.spinbox1.value()
+                c = self.spinbox2.value()
+
+                # self.dicomB.reslice = (a, b, c)
+
+                with self.WaitCursor():
+                    tempDicom = self.dicomB.dicomData
+                    tempmap = np.zeros(np.shape(self.dicomB.dicomData))
+                    tempmap[self.dicomB.zeroPos] = 255
+                    tempDicom = self.Rotation1(tempDicom, a, b, c)
+
+                    tempmap = scipy.ndimage.rotate(tempmap, a, axes=(1, 2), reshape=True, output=np.uint8, order=1,
+                                                   mode='constant', prefilter=True)
+                    tempmap = scipy.ndimage.rotate(tempmap, b, axes=(0, 2), reshape=True, output=np.uint8, order=1,
+                                                   mode='constant', prefilter=True)
+                    tempmap = scipy.ndimage.rotate(tempmap, c, axes=(0, 1), reshape=True, output=np.uint8, order=1,
+                                                   mode='constant', prefilter=True)
+
+                    newzero = (np.where(tempmap == np.max(tempmap))[0][0], np.where(tempmap == np.max(tempmap))[1][0],
+                               np.where(tempmap == np.max(tempmap))[2][0])
+
+                    # newzero = self.dicom.pos
+
+                    cc = np.dot(self.computeRotCam_coreg(a, b, c), self.dicomB.zeroPos)
+
+                    pos = (np.shape(tempDicom)[0]//2,np.shape(tempDicom)[1]//2,np.shape(tempDicom)[2]//2)
+
+                    self.rotatedB = tempDicom
+                    self.rotatedB_pos = pos
+                    self.rotatedB_size = np.shape(tempDicom)
+
+                    self.ShowDicomB(tempDicom, pos, 0)
+                    self.ShowDicomB(tempDicom, pos, 1)
+                    self.ShowDicomB(tempDicom, pos, 2)
+
+    def Rotation(self):
+        if self.MRIorCTsh.currentIndex() == 1:
+            if self.dicom is not None:
+                try:
+                    self.dicom.dicomData = self.rotated
+                    self.dicom.ct1 = self.rotated
+                    self.dicom.pos = self.rotated_pos
+                    self.dicom.dicomSizePixel = self.rotatedB_size
+                except:
+                    a = 0
+                    b = self.spinbox1.value()
+                    c = self.spinbox2.value()
+
+                    # self.dicom.reslice = (a, b, c)
+
+                    with self.WaitCursor():
+                        tempDicom = self.dicom.dicomData
+                        tempmap = np.zeros(np.shape(self.dicom.dicomData))
+                        tempmap[self.dicom.zeroPos] = 255
+                        tempDicom = self.Rotation1(tempDicom, a, b, c)
+
+                        tempmap = scipy.ndimage.rotate(tempmap, a, axes=(1, 2), reshape=True, output=np.uint8, order=1,
+                                                       mode='constant', prefilter=True)
+                        tempmap = scipy.ndimage.rotate(tempmap, b, axes=(0, 2), reshape=True, output=np.uint8, order=1,
+                                                       mode='constant', prefilter=True)
+                        tempmap = scipy.ndimage.rotate(tempmap, c, axes=(0, 1), reshape=True, output=np.uint8, order=1,
+                                                       mode='constant', prefilter=True)
+
+                        newzero = (np.where(tempmap == np.max(tempmap))[0][0], np.where(tempmap == np.max(tempmap))[1][0],
+                                   np.where(tempmap == np.max(tempmap))[2][0])
+
+                        # newzero = self.dicom.pos
+
+                        cc = np.dot(self.computeRotCam_coreg(a, b, c), self.dicom.zeroPos)
+
+                        pos = (np.shape(tempDicom)[0]//2,np.shape(tempDicom)[1]//2,np.shape(tempDicom)[2]//2)
+
+                        self.dicom.dicomData = tempDicom
+                        self.dicom.ct1 = tempDicom
+                        self.dicom.pos = pos
+                        self.dicom.dicomSizePixel = np.shape(tempDicom)
+
+                        self.ShowDicom(tempDicom, pos, 0)
+                        self.ShowDicom(tempDicom, pos, 1)
+                        self.ShowDicom(tempDicom, pos, 2)
+
+        elif self.MRIorCTcr.currentIndex() == 2:
+            if self.dicomB is not None:
+                try:
+                    self.dicomB.dicomData = self.rotated
+                    self.dicomB.ct1 = self.rotated
+                    self.dicomB.pos = self.rotated_pos
+                    self.dicom.dicomSizePixel = self.rotatedB_size
+                except:
+                    a = 0
+                    b = self.spinbox1.value()
+                    c = self.spinbox2.value()
+
+                    # self.dicomB.reslice = (a, b, c)
+
+                    with self.WaitCursor():
+                        tempDicom = self.dicomB.dicomData
+                        tempmap = np.zeros(np.shape(self.dicomB.dicomData))
+                        tempmap[self.dicomB.zeroPos] = 255
+                        tempDicom = self.Rotation1(tempDicom, a, b, c)
+
+                        tempmap = scipy.ndimage.rotate(tempmap, a, axes=(1, 2), reshape=True, output=np.uint8, order=1,
+                                                       mode='constant', prefilter=True)
+                        tempmap = scipy.ndimage.rotate(tempmap, b, axes=(0, 2), reshape=True, output=np.uint8, order=1,
+                                                       mode='constant', prefilter=True)
+                        tempmap = scipy.ndimage.rotate(tempmap, c, axes=(0, 1), reshape=True, output=np.uint8, order=1,
+                                                       mode='constant', prefilter=True)
+
+                        newzero = (np.where(tempmap == np.max(tempmap))[0][0], np.where(tempmap == np.max(tempmap))[1][0],
+                                   np.where(tempmap == np.max(tempmap))[2][0])
+
+                        # newzero = self.dicom.pos
+
+                        cc = np.dot(self.computeRotCam_coreg(a, b, c), self.dicomB.zeroPos)
+
+                        pos = (np.shape(tempDicom)[0]//2,np.shape(tempDicom)[1]//2,np.shape(tempDicom)[2]//2)
+
+                        self.dicomB.dicomData = tempDicom
+                        self.dicomB.ct1 = tempDicom
+                        self.dicomB.pos = pos
+                        self.dicomB.dicomSizePixel = np.shape(tempDicom)
+
+                        self.ShowDicomB(tempDicom, pos, 0)
+                        self.ShowDicomB(tempDicom, pos, 1)
+                        self.ShowDicomB(tempDicom, pos, 2)
+
 
     def checked_box1(self):
         if (self.dicom is not None) and (self.dicomB is not None):
@@ -1523,142 +1799,183 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         self.point3.setChecked(False)
         self.point4.setChecked(False)
         self.points_a.clear()
-        self.points_b.clear()            
+        self.points_b.clear()
+
 
     def combine(self):
         if ((self.dicom is not None) and (self.dicomB is not None)):
-            with self.WaitCursor():
-                # print(self.points_a)
-                # print(self.points_b)
-
-                self.points_a = [(24, 74, 141), (91, 76, 206), (96, 12, 87), (93, 137, 84)]
-                self.points_b = [(81, 110, 236), (154, 110, 358), (139, 53, 104), (132, 175, 120)]
-
-                # self.points_a = [(153, 98, 190), (153, 93, 63), (69, 135, 106), (69, 58, 108)]
-                # self.points_b = [(156, 121, 380), (156, 107, 146), (72, 156, 190), (72, 85, 205)]
-
-                if len(self.points_a) < 4:
-                    warning = QtWidgets.QMessageBox.question(self, 'Warning',
-                                                             "You have not selected enough points!",
-                                                             QtWidgets.QMessageBox.Ok)
-                    if warning == QtWidgets.QMessageBox.Ok:
-                        pass
-                
-                else:
-                    _, M, _ = cv2.estimateAffine3D(np.float32(self.points_a), np.float32(self.points_b))
-
-                    # print(M)
+            if self.PSflag:
+                with self.WaitCursor():
                     # print(self.points_a)
                     # print(self.points_b)
 
-                    pouya = ndimage.affine_transform(self.dicomB.dicomData, M, output_shape=self.dicom.dicomSizePixel)
+                    self.points_a = [(24, 74, 141), (91, 76, 206), (96, 12, 87), (93, 137, 84)]
+                    self.points_b = [(81, 110, 236), (154, 110, 358), (139, 53, 104), (132, 175, 120)]
 
-                    # pouya = cv2.resize(pouya, (int(round(self.dicom.scale[1] * self.dicom.dicomSizePixel[1])),
-                    #                    int(round(self.dicom.scale[2] * self.dicom.dicomSizePixel[2]))),
-                    #                    interpolation=cv2.INTER_AREA)
+                    # self.points_a = [(153, 98, 190), (153, 93, 63), (69, 135, 106), (69, 58, 108)]
+                    # self.points_b = [(156, 121, 380), (156, 107, 146), (72, 156, 190), (72, 85, 205)]
 
-                    # xxx = self.voxel_selection(pouya, self.dicom.dicomData)
-                    # print(xxx)
-
-                    # print(np.shape(np.where(self.dicom.dicomData>200)[0]))
-                    # print(np.where(self.dicom.dicomData>200)[0])
-                    # pouya = np.maximum(pouya, self.dicom.dicomData)
-
-                    # shape = np.shape(pouya)
-                    # print(plt.hist(pouya[shape[0]//2][shape[1]//2][shape[2]//2].reshape((-1, 1)), density=True, bins=256))
-                    # plt.show()
-
-                    ######################################################################################################
-                    # shape = np.shape(pouya)
-                    # pp1 = np.reshape(pouya, (-1))
-                    # pp2 = np.reshape(self.dicom.dicomData, (-1))
-
-                    # import time
-                    # tic = time.time()
-                    # pp1 = ndimage.generic_filter(pp1, np.var, size=5)
-                    # pp2 = ndimage.generic_filter(pp2, np.var, size=5)
-
-                    # pp1 = np.reshape(pp1, shape)
-                    # pp2 = np.reshape(pp2, shape)
-                    # print(time.time()-tic)
-                    ######################################################################################################
-                    with torch.no_grad():
-                        KS = 11
-                        pad = KS//2
-                        m = torch.nn.Conv3d(1,1,KS, stride=2, padding=pad)
-                        m.weight.data.fill_(1)
-                        m.bias.data.fill_(1)
-
-                        pp1 = torch.unsqueeze(torch.unsqueeze(torch.FloatTensor(np.power(pouya,2)), 0), 0)
-                        pp2 = torch.unsqueeze(torch.unsqueeze(torch.FloatTensor(np.power(self.dicom.dicomData,2)), 0), 0)
-
-                        pp1 = m(pp1)/KS
-                        pp1_m = m(torch.unsqueeze(torch.unsqueeze(torch.FloatTensor(pouya), 0), 0))/KS
-                        ##################################################################################################
-                        pp2 = m(pp2)/KS
-                        pp2_m = m(torch.unsqueeze(torch.unsqueeze(torch.FloatTensor(self.dicom.dicomData), 0), 0))/KS
-
-                    pp1 = pp1 - pp1_m
-                    pp2 = pp2 - pp2_m
-
-                    # print(pp1.shape)
-                    # print(pp2.shape)
-                    # print('########################')
-
-                    mm = torch.nn.Upsample(size=np.shape(pouya), mode='nearest')
-                    pp1 = mm(pp1).numpy()[0][0]
-                    pp2 = mm(pp2).numpy()[0][0]
-
-                    # print(np.shape(pp1))
-                    # print(np.shape(pp2))
-                    # print('########################')
-
-
-                    # print('ok1')
-                    # pp1 = ndimage.generic_filter(pp1, np.mean, size=(3,3,3))
-                    # pp2 = ndimage.generic_filter(self.dicom.dicomData, np.mean, size=(3,3,3))
-                    ######################################################################################################
-                    # import time
-                    # pp1 = np.zeros_like(pouya)
-                    # pp2 = np.zeros_like(pouya)
-
-                    # print('##################################################################')
-                    # print(len(pouya))
+                    if len(self.points_a) < 4:
+                        warning = QtWidgets.QMessageBox.question(self, 'Warning',
+                                                                 "You have not selected enough points!",
+                                                                 QtWidgets.QMessageBox.Ok)
+                        if warning == QtWidgets.QMessageBox.Ok:
+                            pass
                     
-                    # tic = time.time()
-                    # for i in range(np.shape(pouya)[2]//2, np.shape(pouya)[2]):
-                    #     pp1[:,:,i] = ndimage.generic_filter(pouya[:,:,i], np.var, size=(3,3))
-                    #     pp2[:,:,i] = ndimage.generic_filter(self.dicom.dicomData[:,:,i], np.var, size=(3,3))
+                    else:
+                        _, M, _ = cv2.estimateAffine3D(np.float32(self.points_a), np.float32(self.points_b))
 
-                    # print('ok')
-                    # print(time.time()-tic)
-                    # print('##################################################################')
-                    ######################################################################################################
+                        # print(M)
+                        # print(self.points_a)
+                        # print(self.points_b)
 
-                    # pouya = np.where(pouya-80>self.dicom.dicomData, pouya, self.dicom.dicomData)
-                    pouya = np.where(pp1<pp2, pouya, self.dicom.dicomData)
+                        pouya = ndimage.affine_transform(self.dicomB.dicomData, M, output_shape=self.dicom.dicomSizePixel)
+
+                        # pouya = cv2.resize(pouya, (int(round(self.dicom.scale[1] * self.dicom.dicomSizePixel[1])),
+                        #                    int(round(self.dicom.scale[2] * self.dicom.dicomSizePixel[2]))),
+                        #                    interpolation=cv2.INTER_AREA)
+
+                        # xxx = self.voxel_selection(pouya, self.dicom.dicomData)
+                        # print(xxx)
+
+                        # print(np.shape(np.where(self.dicom.dicomData>200)[0]))
+                        # print(np.where(self.dicom.dicomData>200)[0])
+                        # pouya = np.maximum(pouya, self.dicom.dicomData)
+
+                        # shape = np.shape(pouya)
+                        # print(plt.hist(pouya[shape[0]//2][shape[1]//2][shape[2]//2].reshape((-1, 1)), density=True, bins=256))
+                        # plt.show()
+
+                        ######################################################################################################
+                        # shape = np.shape(pouya)
+                        # pp1 = np.reshape(pouya, (-1))
+                        # pp2 = np.reshape(self.dicom.dicomData, (-1))
+
+                        # import time
+                        # tic = time.time()
+                        # pp1 = ndimage.generic_filter(pp1, np.var, size=5)
+                        # pp2 = ndimage.generic_filter(pp2, np.var, size=5)
+
+                        # pp1 = np.reshape(pp1, shape)
+                        # pp2 = np.reshape(pp2, shape)
+                        # print(time.time()-tic)
+                        ######################################################################################################
+                        with torch.no_grad():
+                            KS = 11
+                            pad = KS//2
+                            m = torch.nn.Conv3d(1,1,KS, stride=2, padding=pad)
+                            m.weight.data.fill_(1)
+                            m.bias.data.fill_(1)
+
+                            pp1 = torch.unsqueeze(torch.unsqueeze(torch.FloatTensor(np.power(pouya,2)), 0), 0)
+                            pp2 = torch.unsqueeze(torch.unsqueeze(torch.FloatTensor(np.power(self.dicom.dicomData,2)), 0), 0)
+
+                            pp1 = m(pp1)/KS
+                            pp1_m = m(torch.unsqueeze(torch.unsqueeze(torch.FloatTensor(pouya), 0), 0))/KS
+                            ##################################################################################################
+                            pp2 = m(pp2)/KS
+                            pp2_m = m(torch.unsqueeze(torch.unsqueeze(torch.FloatTensor(self.dicom.dicomData), 0), 0))/KS
+
+                        pp1 = pp1 - pp1_m
+                        pp2 = pp2 - pp2_m
+
+                        # print(pp1.shape)
+                        # print(pp2.shape)
+                        # print('########################')
+
+                        mm = torch.nn.Upsample(size=np.shape(pouya), mode='nearest')
+                        pp1 = mm(pp1).numpy()[0][0]
+                        pp2 = mm(pp2).numpy()[0][0]
+
+                        # print(np.shape(pp1))
+                        # print(np.shape(pp2))
+                        # print('########################')
 
 
-                    self.dicomR = DicomClass()
-                    self.dicomR.dicomData = pouya  #
-                    self.dicomR.ct1 = pouya  #
-                    self.dicomR.dicomSizePixel = pouya.shape  #
-                    self.dicomR.scaleM = self.dicom.scaleM
-                    self.dicomR.scale = self.dicom.scale
-                    self.dicomR.pos = (10, 10, 10)
-                    self.dicomR.zeroPos = (0, 0, 0)
-                    # self.dicomR.dicomSizeMM = np.maximum(self.dicom.dicomSizeMM,self.dicomB.dicomSizeMM)
-                    self.dicomR.dicomSizeMM = pouya.shape  #
-                    dicomRtemp = self.dicomR
-                    Settings.myList.append(dicomRtemp)
+                        # print('ok1')
+                        # pp1 = ndimage.generic_filter(pp1, np.mean, size=(3,3,3))
+                        # pp2 = ndimage.generic_filter(self.dicom.dicomData, np.mean, size=(3,3,3))
+                        ######################################################################################################
+                        # import time
+                        # pp1 = np.zeros_like(pouya)
+                        # pp2 = np.zeros_like(pouya)
 
-                    self.dicomR.pos = (int(self.dicomR.dicomSizePixel[0] / 2), int(self.dicomR.dicomSizePixel[1] / 2),
-                                       int(self.dicomR.dicomSizePixel[2] / 2))
-                    self.dicomR.zeroPos = (0, 0, 0)
+                        # print('##################################################################')
+                        # print(len(pouya))
+                        
+                        # tic = time.time()
+                        # for i in range(np.shape(pouya)[2]//2, np.shape(pouya)[2]):
+                        #     pp1[:,:,i] = ndimage.generic_filter(pouya[:,:,i], np.var, size=(3,3))
+                        #     pp2[:,:,i] = ndimage.generic_filter(self.dicom.dicomData[:,:,i], np.var, size=(3,3))
 
-                    self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 0)
-                    self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 1)
-                    self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 2)
+                        # print('ok')
+                        # print(time.time()-tic)
+                        # print('##################################################################')
+                        ######################################################################################################
+
+                        # pouya = np.where(pouya-80>self.dicom.dicomData, pouya, self.dicom.dicomData)
+                        pouya = np.where(pp1<pp2, pouya, self.dicom.dicomData)
+
+
+                        self.dicomR = DicomClass()
+                        self.dicomR.dicomData = pouya  #
+                        self.dicomR.ct1 = pouya  #
+                        self.dicomR.dicomSizePixel = pouya.shape  #
+                        self.dicomR.scaleM = self.dicom.scaleM
+                        self.dicomR.scale = self.dicom.scale
+                        self.dicomR.pos = (10, 10, 10)
+                        self.dicomR.zeroPos = (0, 0, 0)
+                        # self.dicomR.dicomSizeMM = np.maximum(self.dicom.dicomSizeMM,self.dicomB.dicomSizeMM)
+                        self.dicomR.dicomSizeMM = pouya.shape  #
+                        dicomRtemp = self.dicomR
+                        Settings.myList.append(dicomRtemp)
+
+                        self.dicomR.pos = (int(self.dicomR.dicomSizePixel[0] / 2), int(self.dicomR.dicomSizePixel[1] / 2),
+                                           int(self.dicomR.dicomSizePixel[2] / 2))
+                        self.dicomR.zeroPos = (0, 0, 0)
+
+                        self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 0)
+                        self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 1)
+                        self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 2)
+            elif self.Shflag:
+                a=self.dicom.pos
+                b=np.subtract(self.dicom.dicomSizePixel,self.dicom.pos)
+                c=self.dicomB.pos
+                d = np.subtract(self.dicomB.dicomSizePixel,self.dicomB.pos)
+                x=np.maximum(a,c)
+                z=np.maximum(b,d)
+                newD1=np.zeros((x[0]+z[0],x[1]+z[1],x[2]+z[2]))
+                newD2 = np.zeros((x[0] + z[0], x[1] + z[1], x[2] + z[2]))
+                start1 =np.subtract(x,a)
+                start2 = np.subtract(x, c)
+                # newD1[start1[0]:start1[0]+self.dicom.dicomSizePixel[0],start1[1]:start1[1]+self.dicom.dicomSizePixel[1],start1[2]:start1[2]+self.dicom.dicomSizePixel[2]]=np.where(self.dicom.dicomData<int(self.spinbox1.value()*2.55), 0, self.dicom.dicomData)
+                newD1[start1[0]:start1[0]+self.dicom.dicomSizePixel[0],start1[1]:start1[1]+self.dicom.dicomSizePixel[1],start1[2]:start1[2]+self.dicom.dicomSizePixel[2]]=self.dicom.dicomData
+                # newD2[start2[0]:start2[0]+self.dicomB.dicomSizePixel[0], start2[1]:start2[1]+self.dicomB.dicomSizePixel[1], start2[2]:start2[2]+self.dicomB.dicomSizePixel[2]] = np.where(self.dicomB.dicomData<int(self.spinbox2.value()*2.55), 0, self.dicomB.dicomData)
+                newD2[start2[0]:start2[0]+self.dicomB.dicomSizePixel[0], start2[1]:start2[1]+self.dicomB.dicomSizePixel[1], start2[2]:start2[2]+self.dicomB.dicomSizePixel[2]] = np.where(self.dicomB.dicomData<130, 0, self.dicomB.dicomData)
+                # newD1[start1[2]:start1[2]+self.dicom.dicomSizePixel[2],start1[1]:start1[1]+self.dicom.dicomSizePixel[1],start1[0]:start1[0]+self.dicom.dicomSizePixel[0]]=self.dicom.dicomData
+                # newD2[start2[2]:start2[2]+self.dicomB.dicomSizePixel[2], start2[1]:start2[1]+self.dicomB.dicomSizePixel[1], start2[0]:start2[0]+self.dicomB.dicomSizePixel[0]] = self.dicomB.dicomData
+                # end0=np.maximum(newD1,newD2)
+                end0 = np.where(newD1<newD2, newD2, newD1)
+
+                self.dicomR=DicomClass()
+                self.dicomR.dicomData=end0
+                self.dicomR.ct1=end0
+                self.dicomR.dicomSizePixel=end0.shape
+                self.dicomR.scaleM=self.dicom.scaleM
+                self.dicomR.scale = self.dicom.scale
+                self.dicomR.pos=(10,10,10)
+                self.dicomR.zeroPos = (10, 10, 10)
+                self.dicomR.dicomSizeMM=np.maximum(self.dicom.dicomSizeMM,self.dicomB.dicomSizeMM)
+                dicomRtemp=self.dicomR
+                Settings.myList.append(dicomRtemp)
+                # self.close()
+
+                self.dicomR.pos = (int(self.dicomR.dicomSizePixel[0] / 2), int(self.dicomR.dicomSizePixel[1] / 2),
+                                   int(self.dicomR.dicomSizePixel[2] / 2))
+                self.dicomR.zeroPos = (0, 0, 0)
+                self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 0)
+                self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 1)
+                self.ShowDicomR(self.dicomR.dicomData, self.dicomR.pos, 2)
 
 
     def sendMain(self):
