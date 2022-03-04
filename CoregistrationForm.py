@@ -1581,7 +1581,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                     self.ShowDicom(tempDicom, pos, 1)
                     self.ShowDicom(tempDicom, pos, 2)
 
-        elif self.MRIorCTcr.currentIndex() == 2:
+        elif self.MRIorCTsh.currentIndex() == 2:
             if self.dicomB is not None:
                 a = 0
                 b = self.spinbox1.value()
@@ -1665,13 +1665,13 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                         self.ShowDicom(tempDicom, pos, 1)
                         self.ShowDicom(tempDicom, pos, 2)
 
-        elif self.MRIorCTcr.currentIndex() == 2:
+        elif self.MRIorCTsh.currentIndex() == 2:
             if self.dicomB is not None:
                 try:
-                    self.dicomB.dicomData = self.rotated
-                    self.dicomB.ct1 = self.rotated
-                    self.dicomB.pos = self.rotated_pos
-                    self.dicom.dicomSizePixel = self.rotatedB_size
+                    self.dicomB.dicomData = self.rotatedB
+                    self.dicomB.ct1 = self.rotatedB
+                    self.dicomB.pos = self.rotatedB_pos
+                    self.dicomB.dicomSizePixel = self.rotatedB_size
                 except:
                     a = 0
                     b = self.spinbox1.value()
@@ -1695,7 +1695,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                         newzero = (np.where(tempmap == np.max(tempmap))[0][0], np.where(tempmap == np.max(tempmap))[1][0],
                                    np.where(tempmap == np.max(tempmap))[2][0])
 
-                        # newzero = self.dicom.pos
+                        # newzero = self.dicomB.pos
 
                         cc = np.dot(self.computeRotCam_coreg(a, b, c), self.dicomB.zeroPos)
 
