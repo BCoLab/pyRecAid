@@ -181,7 +181,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         self.shift = QtWidgets.QGroupBox('&Shift and &Rotation', self)
         self.shift.move(67, 550)
         self.shift.resize(266, 235)
-        self.shift.hide()
+        # self.shift.hide()
 
         # Pouya Box
         self.my_box2 = QtWidgets.QLabel("Series Selection:", self.shift)
@@ -232,21 +232,29 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         self.shift_d.move(184, 110)
         self.shift_d.clicked.connect(self.shift_Cd)
 
-        self.spinboxLabel1 = QtWidgets.QLabel("AP Angle:", self.shift)
+        self.spinboxLabel1 = QtWidgets.QLabel("X:", self.shift)
         self.spinboxLabel1.move(5, 165)
         self.spinbox1 = QtWidgets.QSpinBox(self.shift)
-        self.spinbox1.move(65, 160)
+        self.spinbox1.move(25, 160)
         self.spinbox1.setMinimum(-180)
         self.spinbox1.setMaximum(180)
         self.spinbox1.setValue(0)
 
-        self.spinboxLabel2 = QtWidgets.QLabel("ML Angle:", self.shift)
-        self.spinboxLabel2.move(135, 165)
+        self.spinboxLabel2 = QtWidgets.QLabel("Y:", self.shift)
+        self.spinboxLabel2.move(90, 165)
         self.spinbox2 = QtWidgets.QSpinBox(self.shift)
-        self.spinbox2.move(200, 160)
+        self.spinbox2.move(110, 160)
         self.spinbox2.setMinimum(-180)
         self.spinbox2.setMaximum(180)
         self.spinbox2.setValue(0)
+
+        self.spinboxLabel3 = QtWidgets.QLabel("Z:", self.shift)
+        self.spinboxLabel3.move(180, 165)
+        self.spinbox3 = QtWidgets.QSpinBox(self.shift)
+        self.spinbox3.move(200, 160)
+        self.spinbox3.setMinimum(-180)
+        self.spinbox3.setMaximum(180)
+        self.spinbox3.setValue(0)
 
         # button
         self.resliceButton = QtWidgets.QPushButton("Rotation preview", self.shift)
@@ -1545,9 +1553,9 @@ class CoregistrationForm(QtWidgets.QMainWindow):
     def Rotation_preview(self):
         if self.MRIorCTsh.currentIndex() == 1:
             if self.dicom is not None:
-                a = 0
-                b = self.spinbox1.value()
-                c = self.spinbox2.value()
+                a = self.spinbox1.value()
+                b = self.spinbox2.value()
+                c = self.spinbox3.value()
 
                 # self.dicom.reslice = (a, b, c)
 
@@ -1583,9 +1591,9 @@ class CoregistrationForm(QtWidgets.QMainWindow):
 
         elif self.MRIorCTsh.currentIndex() == 2:
             if self.dicomB is not None:
-                a = 0
-                b = self.spinbox1.value()
-                c = self.spinbox2.value()
+                a = self.spinbox1.value()
+                b = self.spinbox2.value()
+                c = self.spinbox3.value()
 
                 # self.dicomB.reslice = (a, b, c)
 
@@ -1626,11 +1634,11 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                     self.dicom.dicomData = self.rotated
                     self.dicom.ct1 = self.rotated
                     self.dicom.pos = self.rotated_pos
-                    self.dicom.dicomSizePixel = self.rotatedB_size
+                    self.dicom.dicomSizePixel = self.rotated_size
                 except:
-                    a = 0
-                    b = self.spinbox1.value()
-                    c = self.spinbox2.value()
+                    a = self.spinbox1.value()
+                    b = self.spinbox2.value()
+                    c = self.spinbox3.value()
 
                     # self.dicom.reslice = (a, b, c)
 
@@ -1673,9 +1681,9 @@ class CoregistrationForm(QtWidgets.QMainWindow):
                     self.dicomB.pos = self.rotatedB_pos
                     self.dicomB.dicomSizePixel = self.rotatedB_size
                 except:
-                    a = 0
-                    b = self.spinbox1.value()
-                    c = self.spinbox2.value()
+                    a = self.spinbox1.value()
+                    b = self.spinbox2.value()
+                    c = self.spinbox3.value()
 
                     # self.dicomB.reslice = (a, b, c)
 
