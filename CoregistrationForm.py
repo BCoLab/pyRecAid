@@ -181,7 +181,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         self.shift = QtWidgets.QGroupBox('&Shift and &Rotation', self)
         self.shift.move(67, 550)
         self.shift.resize(266, 235)
-        # self.shift.hide()
+        self.shift.hide()
 
         # Pouya Box
         self.my_box2 = QtWidgets.QLabel("Series Selection:", self.shift)
