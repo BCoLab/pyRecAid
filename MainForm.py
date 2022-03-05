@@ -118,24 +118,24 @@ class MainForm(QtWidgets.QMainWindow):
         self.RgroupBox.hide()
 
         # spinbox
-        # self.spinboxLabel0 = QtWidgets.QLabel("X:", self.groupBox)
-        # self.spinboxLabel0.move(20, 25)
-        # self.spinbox0 = QtWidgets.QSpinBox(self.groupBox)
-        # self.spinbox0.move(40, 25)
-        # self.spinbox0.setMinimum(-180)
-        # self.spinbox0.setMaximum(180)
-        # self.spinbox0.setValue(0)
+        self.spinboxLabel0 = QtWidgets.QLabel("X:", self.RgroupBox)
+        self.spinboxLabel0.move(5, 30)
+        self.spinbox0 = QtWidgets.QSpinBox(self.RgroupBox)
+        self.spinbox0.move(25, 25)
+        self.spinbox0.setMinimum(-180)
+        self.spinbox0.setMaximum(180)
+        self.spinbox0.setValue(0)
 
-        self.spinboxLabel1 = QtWidgets.QLabel("AP Angle:", self.RgroupBox)
-        self.spinboxLabel1.move(5, 30)
+        self.spinboxLabel1 = QtWidgets.QLabel("Y:", self.RgroupBox)
+        self.spinboxLabel1.move(90, 30)
         self.spinbox1 = QtWidgets.QSpinBox(self.RgroupBox)
-        self.spinbox1.move(65, 25)
+        self.spinbox1.move(110, 25)
         self.spinbox1.setMinimum(-180)
         self.spinbox1.setMaximum(180)
         self.spinbox1.setValue(0)
 
-        self.spinboxLabel2 = QtWidgets.QLabel("ML Angle:", self.RgroupBox)
-        self.spinboxLabel2.move(135, 30)
+        self.spinboxLabel2 = QtWidgets.QLabel("Z:", self.RgroupBox)
+        self.spinboxLabel2.move(180, 30)
         self.spinbox2 = QtWidgets.QSpinBox(self.RgroupBox)
         self.spinbox2.move(200, 25)
         self.spinbox2.setMinimum(-180)
@@ -891,8 +891,8 @@ class MainForm(QtWidgets.QMainWindow):
         return d
 
     def ResliceMethod(self):
-        a = 0
-        # self.spinbox0.value()
+        # a = 0
+        a = self.spinbox0.value()
         b = self.spinbox1.value()
         c = self.spinbox2.value()
 
