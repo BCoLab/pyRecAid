@@ -817,15 +817,35 @@ class MainForm(QtWidgets.QMainWindow):
             with self.WaitCursor():
                 if fname[0]:
                     with open(fname[0], 'rb') as handle:
-                        # unpickler = pickle.Unpickler(handle)
-                        self.dicom = pickle.load(handle)
-                        # self.dicom=DicomClass()
-                        # self.dicom = unpickler.load()
-                        # print(np.shape(self.dicom))
-                        # print(self.dicom)
-                        # print('----------------------------')
+                        unpickler = pickle.Unpickler(handle)
+                        temp = unpickler.load()
+
+                        self.dicom = DicomClass()
+                        self.dicom.dicomData = temp.dicomData
+                        self.dicom.dicomSizePixel = temp.dicomSizePixel
+                        self.dicom.pos = (temp.dicomSizePixel[0]//2,temp.dicomSizePixel[1]//2,temp.dicomSizePixel[2]//2)
+                        self.dicom.scale = temp.scale
+                        self.dicom.scaleM = temp.scaleM
+                        self.dicom.dicomSizeMM = temp.dicomSizeMM
+                        self.dicom.zeroPos = temp.zeroPos
+                        self.dicom.dicomDataRaw = temp.dicomDataRaw
+                        self.dicom.dicomDataReslice = temp.dicomDataReslice
+                        self.dicom.isResliceExist = temp.isResliceExist
+                        self.dicom_chamber = temp.dicom_chamber
+                        self.dicom.ct = temp.ct
+                        self.dicom.ct1 = temp.ct1
+                        self.dicom.reslice = temp.reslice
+
+
                         self.setZeroButton.setEnabled(True)
                         self.resliceButton.setEnabled(True)
+
+                        self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                        self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                        self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+
+                        # print('----------------------------')
+
                     if self.dicom.isResliceExist:
                         self.openLastReslice.setEnabled(True)
                         self.sendButton.setEnabled(True)
