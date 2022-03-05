@@ -84,7 +84,7 @@ Redirect to the %directory of downloaded files%/src/and run Main.py
 A user guide, manual.pdf, can be found at the src directory.
 
 # Contact Information
-You are welcome to send your questions or suggestions about the program to Hamed Heirari Gorji, the main developer of the project to hamed.h@live.com or Pouya Narimani to pouya.narimani@ut.ac.ir. You are also encouraged to take part in the future developments of the project and to tailor the program according to your needs.
+You are welcome to send your questions or suggestions about the program to Hamed Heirari Gorji (the main developer of the project) to hamed.h@live.com or Pouya Narimani (the new version's developer) to pouya.narimani@ut.ac.ir. You are also encouraged to take part in the future developments of the project and to tailor the program according to your needs.
 
 # Suggestions for Further Development:
 Suggestions in this sections can be incorporated into the future editions of the program either by the original developers or any other interested individual. The current listing:
