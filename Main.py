@@ -1,8 +1,10 @@
 """"
-pyRecAid
+pyRECaid
 
-Written by Hamed Heidari (hamed.h@live.com).
-Updated by Pouya Narimani (pouya.narimani@ut.ac.ir).
+Written by:
+
+Pouya Narimani (pouya.narimani@ut.ac.ir).
+Hamed Heidari (hamed.h@live.com).
 
 (c) Copyright BCoLab, All Rights Reserved. NO WARRANTY.
 

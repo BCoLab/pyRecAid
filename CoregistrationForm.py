@@ -1,3 +1,15 @@
+""""
+pyRECaid
+
+Written by:
+
+Pouya Narimani (pouya.narimani@ut.ac.ir).
+Hamed Heidari (hamed.h@live.com).
+
+(c) Copyright BCoLab, All Rights Reserved. NO WARRANTY.
+
+"""
+
 # import os,sys
 # import dicom as pydicom
 # import numpy as np
@@ -46,7 +58,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         self.points_b = []
         self.setGeometry(20, 50, 1700, 920)
         self.setMinimumSize(1710, 980)
-        self.setWindowTitle('pyRecAid: Coregistration')
+        self.setWindowTitle('pyRECaid: Coregistration')
         self.statusBar()
 
         # list
@@ -185,76 +197,94 @@ class CoregistrationForm(QtWidgets.QMainWindow):
 
         # Pouya Box
         self.my_box2 = QtWidgets.QLabel("Series Selection:", self.shift)
-        self.my_box2.move(10, 30)
+        self.my_box2.move(10, 25)
         self.my_box2.resize(150, 30)
+
+        # Pouya Box
+        self.shift_box1 = QtWidgets.QGroupBox('        AP', self.shift)
+        self.shift_box1.move(10, 60)
+        self.shift_box1.resize(75, 125)
+
+        # Pouya Box
+        self.shift_box2 = QtWidgets.QGroupBox('        ML', self.shift)
+        self.shift_box2.move(95, 60)
+        self.shift_box2.resize(75, 125)
+
+        # Pouya Box
+        self.shift_box3 = QtWidgets.QGroupBox('        DV', self.shift)
+        self.shift_box3.move(183, 60)
+        self.shift_box3.resize(75, 125)
 
         # Pouya list
         self.MRIorCTsh = QtWidgets.QComboBox(self.shift)
         self.MRIorCTsh.addItem("Select Series")
         self.MRIorCTsh.addItem("First Series")
         self.MRIorCTsh.addItem("Second Series")
-        self.MRIorCTsh.move(130, 30)
+        self.MRIorCTsh.move(130, 25)
         self.MRIorCTsh.resize(130, 30)
 
         # button pouya
-        self.shift_r = QtWidgets.QPushButton("Hu", self.shift)
-        self.shift_r.resize(70, 30)
-        self.shift_r.move(10, 70)
+        self.shift_r = QtWidgets.QPushButton("Up", self.shift_box2)
+        self.shift_r.resize(50, 25)
+        self.shift_r.move(13, 25)
         self.shift_r.clicked.connect(self.shift_Hu)
 
         # button pouya
-        self.shift_l = QtWidgets.QPushButton("Hd", self.shift)
-        self.shift_l.resize(70, 30)
-        self.shift_l.move(10, 110)
+        self.shift_l = QtWidgets.QPushButton("Down", self.shift_box2)
+        self.shift_l.resize(50, 25)
+        self.shift_l.move(13, 55)
         self.shift_l.clicked.connect(self.shift_Hd)
 
         # button pouya
-        self.shift_u = QtWidgets.QPushButton("Su", self.shift)
-        self.shift_u.resize(70, 30)
-        self.shift_u.move(97, 70)
+        self.shift_u = QtWidgets.QPushButton("Up", self.shift_box3)
+        self.shift_u.resize(50, 25)
+        self.shift_u.move(13, 25)
         self.shift_u.clicked.connect(self.shift_Su)
 
         # button pouya
-        self.shift_d = QtWidgets.QPushButton("Sd", self.shift)
-        self.shift_d.resize(70, 30)
-        self.shift_d.move(97, 110)
+        self.shift_d = QtWidgets.QPushButton("Down", self.shift_box3)
+        self.shift_d.resize(50, 25)
+        self.shift_d.move(13, 55)
         self.shift_d.clicked.connect(self.shift_Sd)
 
         # button pouya
-        self.shift_d = QtWidgets.QPushButton("Cu", self.shift)
-        self.shift_d.resize(70, 30)
-        self.shift_d.move(184, 70)
+        self.shift_d = QtWidgets.QPushButton("Up", self.shift_box1)
+        self.shift_d.resize(50, 25)
+        self.shift_d.move(13, 25)
         self.shift_d.clicked.connect(self.shift_Cu)
 
         # button pouya
-        self.shift_d = QtWidgets.QPushButton("Cd", self.shift)
-        self.shift_d.resize(70, 30)
-        self.shift_d.move(184, 110)
+        self.shift_d = QtWidgets.QPushButton("Down", self.shift_box1)
+        self.shift_d.resize(50, 25)
+        self.shift_d.move(13, 55)
         self.shift_d.clicked.connect(self.shift_Cd)
 
-        self.spinboxLabel1 = QtWidgets.QLabel("AP:", self.shift)
-        self.spinboxLabel1.move(5, 165)
-        self.spinbox1 = QtWidgets.QSpinBox(self.shift)
-        self.spinbox1.move(25, 160)
-        self.spinbox1.setMinimum(-180)
-        self.spinbox1.setMaximum(180)
-        self.spinbox1.setValue(0)
+        # self.spinboxLabel3 = QtWidgets.QLabel("AP:", self.shift)
+        # self.spinboxLabel3.move(10, 165)
+        # self.spinbox3 = QtWidgets.QSpinBox(self.shift)
+        self.spinbox3 = QtWidgets.QSpinBox(self.shift_box1)
+        self.spinbox3.move(8, 95)
+        self.spinbox3.setMinimum(-180)
+        self.spinbox3.setMaximum(180)
+        self.spinbox3.setValue(0)
 
-        self.spinboxLabel2 = QtWidgets.QLabel("ML:", self.shift)
-        self.spinboxLabel2.move(90, 165)
-        self.spinbox2 = QtWidgets.QSpinBox(self.shift)
-        self.spinbox2.move(110, 160)
+        # self.spinboxLabel2 = QtWidgets.QLabel("ML:", self.shift)
+        # self.spinboxLabel2.move(90, 165)
+        # self.spinbox2 = QtWidgets.QSpinBox(self.shift)
+        self.spinbox2 = QtWidgets.QSpinBox(self.shift_box2)
+        self.spinbox2.move(8, 95)
         self.spinbox2.setMinimum(-180)
         self.spinbox2.setMaximum(180)
         self.spinbox2.setValue(0)
 
-        self.spinboxLabel3 = QtWidgets.QLabel("DV:", self.shift)
-        self.spinboxLabel3.move(180, 165)
-        self.spinbox3 = QtWidgets.QSpinBox(self.shift)
-        self.spinbox3.move(200, 160)
-        self.spinbox3.setMinimum(-180)
-        self.spinbox3.setMaximum(180)
-        self.spinbox3.setValue(0)
+        # self.spinboxLabel1 = QtWidgets.QLabel("DV:", self.shift)
+        # self.spinboxLabel1.move(180, 165)
+        # self.spinbox1 = QtWidgets.QSpinBox(self.shift)
+        self.spinbox1 = QtWidgets.QSpinBox(self.shift_box3)
+        self.spinbox1.move(8, 95)
+        self.spinbox1.setMinimum(-180)
+        self.spinbox1.setMaximum(180)
+        self.spinbox1.setValue(0)
 
         # button
         self.resliceButton = QtWidgets.QPushButton("Rotation preview", self.shift)

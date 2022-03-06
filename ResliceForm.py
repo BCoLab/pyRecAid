@@ -1,3 +1,15 @@
+""""
+pyRECaid
+
+Written by:
+
+Pouya Narimani (pouya.narimani@ut.ac.ir).
+Hamed Heidari (hamed.h@live.com).
+
+(c) Copyright BCoLab, All Rights Reserved. NO WARRANTY.
+
+"""
+
 from PyQt5 import QtWidgets, QtCore, QtGui
 import scipy
 import scipy.ndimage
@@ -40,7 +52,7 @@ class ResliceForm(QtWidgets.QMainWindow):
 
         self.setGeometry(20, 50, 1880, 620)
         self.setMinimumSize(1800, 600)
-        self.setWindowTitle('pyRecAid: Reslice')
+        self.setWindowTitle('pyRECaid: Reslice')
         self.statusBar()
 
         # region Chamber
@@ -51,7 +63,7 @@ class ResliceForm(QtWidgets.QMainWindow):
         # self.groupBoxch.hide()
 
         # spinbox
-        self.spinboxLabelch0 = QtWidgets.QLabel("depth:", self.groupBoxch)
+        self.spinboxLabelch0 = QtWidgets.QLabel("DV:", self.groupBoxch)
         self.spinboxLabelch0.move(10, 25)
         self.spinboxch0 = QtWidgets.QSpinBox(self.groupBoxch)
         self.spinboxch0.move(65, 25)

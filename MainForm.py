@@ -1,8 +1,10 @@
 """"
-pyRecAid
+pyRECaid
 
-Written by Hamed Heidari (hamed.h@live.com).
-Updated by Pouya Narimani (pouya.narimani@ut.ac.ir).
+Written by:
+
+Pouya Narimani (pouya.narimani@ut.ac.ir).
+Hamed Heidari (hamed.h@live.com).
 
 (c) Copyright BCoLab, All Rights Reserved. NO WARRANTY.
 
@@ -48,7 +50,7 @@ class MainForm(QtWidgets.QMainWindow):
         Settings.init()  # Call only once
 
         self.setGeometry(20, 50, 1650, 920)
-        self.setWindowTitle('pyRecAid: Main')
+        self.setWindowTitle('pyRECaid: Main')
         self.setMinimumSize(1760, 980)
         self.statusBar()
 
@@ -102,7 +104,7 @@ class MainForm(QtWidgets.QMainWindow):
         # self.QIButton.setEnabled(False)
 
         # button
-        self.addButton = QtWidgets.QPushButton("&Coregistration", self)
+        self.addButton = QtWidgets.QPushButton("&Co-registration", self)
         self.addButton.move(145, 400)
         self.addButton.resize(110, 35)
         self.addButton.clicked.connect(self.Coregistration)
@@ -190,7 +192,7 @@ class MainForm(QtWidgets.QMainWindow):
         self.groupBoxch.hide()
 
         # spinbox
-        self.spinboxLabelch0 = QtWidgets.QLabel("depth:", self.groupBoxch)
+        self.spinboxLabelch0 = QtWidgets.QLabel("DV:", self.groupBoxch)
         self.spinboxLabelch0.move(10, 25)
         self.spinboxch0 = QtWidgets.QSpinBox(self.groupBoxch)
         self.spinboxch0.move(40, 25)
@@ -576,14 +578,14 @@ class MainForm(QtWidgets.QMainWindow):
         saveFile.setStatusTip('Save new File')
         saveFile.triggered.connect(self.SaveFile)
 
-        coreg = QtWidgets.QAction(QtGui.QIcon('open.png'), 'Coregistration', self)
+        coreg = QtWidgets.QAction(QtGui.QIcon('open.png'), 'Co-registration', self)
         coreg.setShortcut('Ctrl+D')
-        coreg.setStatusTip('coregistration')
+        coreg.setStatusTip('co-registration')
         coreg.triggered.connect(self.Coregistration)
 
-        coregPet = QtWidgets.QAction(QtGui.QIcon('open.png'), 'CoRegistration(PET)', self)
+        coregPet = QtWidgets.QAction(QtGui.QIcon('open.png'), 'Co-Registration(PET)', self)
         coregPet.setShortcut('Ctrl+D')
-        coregPet.setStatusTip('coregistration')
+        coregPet.setStatusTip('co-registration')
         coregPet.triggered.connect(self.CoregistrationPet)
 
         resliceOptions = QtWidgets.QAction('Reslice', self)
@@ -1469,7 +1471,7 @@ class MainForm(QtWidgets.QMainWindow):
         about.setMaximumSize(700, 500)
 
         text = \
-            "this is pyRecAid; open-source python recording\n" + "utility for imaging guided intracranial access.\n" + \
+            "this is pyRECaid; open-source python recording\n" + "utility for imaging guided intracranial access.\n" + \
             "first designed and developed in BCoL, SCS, IPM,\n" + "by Hamed Heidari and Farzad Shayanfar\n" + \
             "and updated by Pouya Narimani.\n" + \
             "for more information, please refer to the manual at help menu\n" + "\nversion: 0.5"

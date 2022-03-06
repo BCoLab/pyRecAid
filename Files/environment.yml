@@ -1,4 +1,4 @@
-name: IPM
+name: pyRECaid
 channels:
   - owlas
   - pytorch
