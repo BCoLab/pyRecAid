@@ -232,7 +232,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         self.shift_d.move(184, 110)
         self.shift_d.clicked.connect(self.shift_Cd)
 
-        self.spinboxLabel1 = QtWidgets.QLabel("X:", self.shift)
+        self.spinboxLabel1 = QtWidgets.QLabel("AP:", self.shift)
         self.spinboxLabel1.move(5, 165)
         self.spinbox1 = QtWidgets.QSpinBox(self.shift)
         self.spinbox1.move(25, 160)
@@ -240,7 +240,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         self.spinbox1.setMaximum(180)
         self.spinbox1.setValue(0)
 
-        self.spinboxLabel2 = QtWidgets.QLabel("Y:", self.shift)
+        self.spinboxLabel2 = QtWidgets.QLabel("ML:", self.shift)
         self.spinboxLabel2.move(90, 165)
         self.spinbox2 = QtWidgets.QSpinBox(self.shift)
         self.spinbox2.move(110, 160)
@@ -248,7 +248,7 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         self.spinbox2.setMaximum(180)
         self.spinbox2.setValue(0)
 
-        self.spinboxLabel3 = QtWidgets.QLabel("Z:", self.shift)
+        self.spinboxLabel3 = QtWidgets.QLabel("DV:", self.shift)
         self.spinboxLabel3.move(180, 165)
         self.spinbox3 = QtWidgets.QSpinBox(self.shift)
         self.spinbox3.move(200, 160)

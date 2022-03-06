@@ -118,7 +118,7 @@ class MainForm(QtWidgets.QMainWindow):
         self.RgroupBox.hide()
 
         # spinbox
-        self.spinboxLabel0 = QtWidgets.QLabel("X:", self.RgroupBox)
+        self.spinboxLabel0 = QtWidgets.QLabel("AP:", self.RgroupBox)
         self.spinboxLabel0.move(5, 30)
         self.spinbox0 = QtWidgets.QSpinBox(self.RgroupBox)
         self.spinbox0.move(25, 25)
@@ -126,7 +126,7 @@ class MainForm(QtWidgets.QMainWindow):
         self.spinbox0.setMaximum(180)
         self.spinbox0.setValue(0)
 
-        self.spinboxLabel1 = QtWidgets.QLabel("Y:", self.RgroupBox)
+        self.spinboxLabel1 = QtWidgets.QLabel("ML:", self.RgroupBox)
         self.spinboxLabel1.move(90, 30)
         self.spinbox1 = QtWidgets.QSpinBox(self.RgroupBox)
         self.spinbox1.move(110, 25)
@@ -134,7 +134,7 @@ class MainForm(QtWidgets.QMainWindow):
         self.spinbox1.setMaximum(180)
         self.spinbox1.setValue(0)
 
-        self.spinboxLabel2 = QtWidgets.QLabel("Z:", self.RgroupBox)
+        self.spinboxLabel2 = QtWidgets.QLabel("DV:", self.RgroupBox)
         self.spinboxLabel2.move(180, 30)
         self.spinbox2 = QtWidgets.QSpinBox(self.RgroupBox)
         self.spinbox2.move(200, 25)
