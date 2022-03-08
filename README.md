@@ -2,7 +2,8 @@
 
 # pyRECaid
 
-![](./Resource/Icon.png)
+![](./Resource/Icon.png){:height="36px" width="36px"}
+
 This is the git page for Python Recording Aid, pyRECaid, an open source utility for imaging-guided cerebral recording from primate subjects. It can also be used by experimentalists to deliver drugs into specific targets within the brain.
 
 Available for Windows and Linux machines.
