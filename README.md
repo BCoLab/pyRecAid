@@ -1,8 +1,8 @@
 
 
-# pyRecAid
+# pyRECaid
 
-This is the git page for Python Recording Aid, pyRecAid, an open source utility for imaging-guided cerebral recording from primate subjects. It can also be used by experimentalists to deliver drugs into specific targets within the brain.
+This is the git page for Python Recording Aid, pyRECaid, an open source utility for imaging-guided cerebral recording from primate subjects. It can also be used by experimentalists to deliver drugs into specific targets within the brain.
 
 Available for Windows and Linux machines.
 
@@ -62,13 +62,13 @@ Installing from yml file is the easiest way to execute the software. To after in
 ```sh
 >> conda env create -f environment.yml
 ```
-By running this command a new environment will be created under the name "pyRecAid". By executing the bellow command you can see the existing environments in your device.
+By running this command a new environment will be created under the name "pyRECaid". By executing the bellow command you can see the existing environments in your device.
 ```sh
 >> conda env list
 ```
-If the installation process runs successfully, you should be able to see the "pyRecAid" environment under the exported list.  After installing successfully, you have to activate the environment by running:
+If the installation process runs successfully, you should be able to see the "pyRECaid" environment under the exported list.  After installing successfully, you have to activate the environment by running:
 ```sh
->> conda activate pyRecAid
+>> conda activate pyRECaid
 ```
 After activating the environment, go to the cloned code directory on your system and run:
 ```sh
@@ -95,7 +95,7 @@ Suggestions in this sections can be incorporated into the future editions of the
 -	Addition of a logger for keeping track of targeted areas between sessions
 
 # Citation
-If pyRecAid helps your research, please cite our paper in your publications.
+If pyRECaid helps your research, please cite our paper in your publications.
 
 ```
 @article{Rezayat_2022,

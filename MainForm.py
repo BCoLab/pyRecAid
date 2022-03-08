@@ -54,6 +54,8 @@ class MainForm(QtWidgets.QMainWindow):
         self.setMinimumSize(1760, 980)
         self.statusBar()
 
+        self.setWindowIcon(QtGui.QIcon("Resource/Icon.png"))
+
         # layoutGrid = QGridLayout()
         # self.setLayout(layoutGrid)
 
