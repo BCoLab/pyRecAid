@@ -551,15 +551,6 @@ class MainForm(QtWidgets.QMainWindow):
         # self.labelImg22.setStyleSheet('QLabel {color: #222222;}')
         # self.labelImg22.setFont(font)
 
-
-        # img3
-        # self.img3 = QtWidgets.QLabel(self)
-        # self.img3.move(1020, 480)
-        # self.img3.resize(600, 400)
-        # self.img3.setStyleSheet('QLabel {background-color: #000000;}')
-        # pixmap4 = QtGui.QPixmap("dicom.png")
-        # self.img3.setPixmap(pixmap4)
-        # self.img3.setScaledContents(1)
         # endregion
 
         # region Menu
