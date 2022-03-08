@@ -10,7 +10,7 @@ Hamed Heidari (hamed.h@live.com).
 
 """
 
-#  Settings.py
+# Settings.py
 def init():
     global myList
     myList = []
