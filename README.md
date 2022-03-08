@@ -42,7 +42,7 @@ It takes some time so be patient and wait for the transactions to finish and the
 ```sh
 >> conda install -c clinicalgraphics gdcm
 ```
--	In case you do not want to install anaconda, you can download the GDCM library at [here](https://sourceforge.net/p/gdcm/gdcm/).
+-	In case you do not want to install anaconda, you can download the GDCM library [here](https://sourceforge.net/p/gdcm/gdcm/).
 
 #### For Linux users:
 Linux machines contain a system Python3. It is highly recommended that you don’t install the program using the system Python3. You are better to install a virtual environment by venv or conda (in case you have anaconda or miniconda) and then follow the instructions below.
@@ -55,7 +55,7 @@ Open a terminal with your desired python3 environment activated and type in the 
 ```sh
 >> conda install -c clinicalgraphics gdcm
 ```
--	In case you do not want to install anaconda, you can download the GDCM library at:	https://sourceforge.net/p/gdcm/gdcm/
+-	In case you do not want to install anaconda, you can download the GDCM library [here](https://sourceforge.net/p/gdcm/gdcm/).
 
 #### yml file installation
 Installing from yml file is the easiest way to execute the software. To after installing the anaconda open a terminal (Linux/Mac) or anaconda command prompt (Windows) and create a new environment by running:
@@ -77,8 +77,11 @@ After activating the environment, go to the cloned code directory on your system
 Thereafter, the software starts and ready to be used.
 
 
-# Running the program
+# Running the Software
 Redirect to the %directory of downloaded files%/src/and run Main.py
+
+# Sample Data
+A dcmf file is provided in the Data directory of the project and it could be loaded by selecting open from file menu. This sample data is processed by this software. Furthermore, there exist raw MR and CT that could be downloaded from [here]().
 
 # User guide
 A user guide, manual.pdf, can be found at the src directory.
