@@ -81,7 +81,7 @@ Thereafter, the software starts and ready to be used.
 Redirect to the %directory of downloaded files%/src/and run Main.py
 
 # Sample Data
-A dcmf file is provided in the Data directory of the project and it could be loaded by selecting open from file menu. This sample data is processed by this software. Furthermore, there exist raw MR and CT that could be downloaded from [here]().
+A dcmf file is provided in the Data directory of the project and it could be loaded by selecting open from file menu. This sample data is processed by this software. Furthermore, there exist raw MR and CT that could be downloaded from [here](https://drive.google.com/file/d/1HtTGseKm5HR0GKWeYhZnaZP4V2fxQOVe/view?usp=sharing).
 
 # User guide
 A user guide, manual.pdf, can be found at the src directory.
