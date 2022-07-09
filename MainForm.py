@@ -21,6 +21,7 @@ from DicomClass import *
 from NiftiClass import *
 from ResliceForm import *
 from CoregistrationForm import *
+from SegmentationForm import *
 from ChamberClass import *
 from ResliceData import *
 import pickle
@@ -107,10 +108,16 @@ class MainForm(QtWidgets.QMainWindow):
 
         # button
         self.addButton = QtWidgets.QPushButton("&Co-registration", self)
-        self.addButton.move(145, 400)
+        self.addButton.move(67, 400)
         self.addButton.resize(110, 35)
         self.addButton.clicked.connect(self.Coregistration)
         # self.addButton.setEnabled(False)
+
+        # button
+        self.segButton = QtWidgets.QPushButton("&Segmentation", self)
+        self.segButton.move(223, 400)
+        self.segButton.resize(110, 35)
+        self.segButton.clicked.connect(self.Segmentation)
 
         # endregion
 
@@ -709,6 +716,12 @@ class MainForm(QtWidgets.QMainWindow):
         self.coreg.parent = self
         self.coreg.show()
 
+    def Segmentation(self):
+        self.segmen = SegmentationForm(self)
+        self.segmen.dicomR = None
+        self.segmen.parent = self
+        self.segmen.show()
+
     def CoregistrationPet(self):
         aa = self.coreg.hamed
         self.coreg2 = CoregistrationForm2(self)
@@ -1280,6 +1293,15 @@ class MainForm(QtWidgets.QMainWindow):
         self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
         self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
         self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+
+    # @QtCore.pyqtSlot()
+    # def receiveSeg(self):
+    #     a = 12
+    #     self.dicom = self.dicomR
+    #     self.dicom.dicomDataRaw = copy.deepcopy(self.dicom.dicomData)
+    #     self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+    #     self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+    #     self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)    
 
     # chamber = []
 

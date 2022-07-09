@@ -25,6 +25,7 @@ from scipy import ndimage
 from NiftiClass import *
 from DicomClass import *
 from ResliceForm import *
+from SegmentationForm import *
 # from ResliceData import *
 # import transforms3d
 import Settings
@@ -436,6 +437,13 @@ class CoregistrationForm(QtWidgets.QMainWindow):
         self.sendMainButton.move(1175, 940)
         self.sendMainButton.setStyleSheet('QPushButton {color: #3333AA;}')
         self.sendMainButton.clicked.connect(self.sendMain)
+
+        # button
+        self.sendSegButton = QtWidgets.QPushButton("&Send To SegmentationForm", self)
+        self.sendSegButton.resize(200, 40)
+        self.sendSegButton.move(940, 940)
+        self.sendSegButton.setStyleSheet('QPushButton {color: red;}')
+        self.sendSegButton.clicked.connect(self.sendSegmentation)
 
         font = QtGui.QFont()
         font.setPointSize(14)
@@ -2023,4 +2031,14 @@ class CoregistrationForm(QtWidgets.QMainWindow):
             self.parent.resliceButton.setEnabled(True)
             # self.parent.QIButton.setEnabled(True)
             self.signal.connect(self.parent.receiveCoReg)
+            self.signal.emit()
+
+    def sendSegmentation(self):
+        if (self.dicomR is not None):
+            segmen = SegmentationForm(self.parent)
+            segmen.dicomR = None
+
+            segmen.dicomB = self.dicomR
+            segmen.show()
+            self.signal.connect(segmen.receiveCoReg)
             self.signal.emit()

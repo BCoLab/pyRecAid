@@ -122,7 +122,48 @@ class NiftiClass:
         self.scale = tuple(x / min(self.scaleM) for x in self.scaleM)
         self.dicomSizeMM = np.array(self.dicomSizePixel) * np.array(self.scaleM)
         # self.scaleM = (float(info.PixelSpacing[0]), float(info.PixelSpacing[1]), float(info.SliceThickness))
-        
+
+    def Colorize(self, data):
+        values = list(np.unique(data))
+        values.pop(0)
+
+        colorized_image = np.zeros((data.shape[0], data.shape[1], data.shape[2], 3), dtype=np.uint8)
+
+        for i in range(len(values)):
+            colorized_image[data==values[i]] = (np.random.randint(0,255), np.random.randint(0,255), np.random.randint(0,255))
+
+        return colorized_image
+
+    def ColorizedRead(self, id, rsizeFlag=0):
+        img = nib.load(id)
+        header = img.header
+
+        series = np.array(img.get_data())
+        values = list(np.unique(series))
+        series[series<values[-256]] = 0
+
+        # print(np.shape(series))
+
+        self.ct = series
+        # self.ct = np.array(img.get_data())
+        # plt.imshow(self.ct[0], cmap='gray')
+        # plt.show()
+        # print(self.ct.min(), self.ct.max())
+        # print('---------------------------------')
+        self.ct1 = ((self.ct - self.ct.min()) / (self.ct.max() - self.ct.min())) * 255
+
+        # plt.imshow(self.ct[0], cmap='gray')
+        # plt.show()
+        # print(self.ct1.min(), self.ct1.max())
+
+        self.dicomData = self.ct1
+
+        self.dicomSizePixel = header.get_data_shape()
+
+        self.scaleM = header.get_zooms()[:3]
+        self.scale = tuple(x / min(self.scaleM) for x in self.scaleM)
+        self.dicomSizeMM = np.array(self.dicomSizePixel) * np.array(self.scaleM)
+        # self.dicomColorizedData = self.Colorize(self.dicomData)
 
 
         '''
