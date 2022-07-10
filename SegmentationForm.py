@@ -62,36 +62,36 @@ class SegmentationForm(QtWidgets.QMainWindow):
         self.statusBar()
 
         # list
-        self.listWidgetB = QtWidgets.QListWidget(self)
-        self.listWidgetB.move(50, 50)
-        self.listWidgetB.resize(300, 180)
+        self.listWidget = QtWidgets.QListWidget(self)
+        self.listWidget.move(50, 50)
+        self.listWidget.resize(300, 180)
 
         # button
         self.openDir = QtWidgets.QPushButton("&Load Folder", self)
         self.openDir.move(67, 250)
-        self.openDir.clicked.connect(self.LoadDirB)
+        self.openDir.clicked.connect(self.LoadDir)
+
+        # button
+        self.loadDataButton = QtWidgets.QPushButton("&Load", self)
+        self.loadDataButton.move(233, 250)
+        self.loadDataButton.clicked.connect(self.LoadData)
+        self.loadDataButton.setEnabled(False)
+
+        # list
+        self.listWidgetB = QtWidgets.QListWidget(self)
+        self.listWidgetB.move(50, 300)
+        self.listWidgetB.resize(300, 180)
+
+        # button
+        self.openDirB = QtWidgets.QPushButton("&Load Folder", self)
+        self.openDirB.move(67, 500)
+        self.openDirB.clicked.connect(self.LoadDirB)
 
         # button
         self.loadDataButtonB = QtWidgets.QPushButton("&Load", self)
-        self.loadDataButtonB.move(233, 250)
+        self.loadDataButtonB.move(233, 500)
         self.loadDataButtonB.clicked.connect(self.LoadDataB)
         self.loadDataButtonB.setEnabled(False)
-
-        # # list
-        # self.listWidgetB = QtWidgets.QListWidget(self)
-        # self.listWidgetB.move(50, 300)
-        # self.listWidgetB.resize(300, 180)
-
-        # # button
-        # self.openDirB = QtWidgets.QPushButton("&Load Folder", self)
-        # self.openDirB.move(67, 500)
-        # self.openDirB.clicked.connect(self.LoadDirB)
-
-        # # button
-        # self.loadDataButtonB = QtWidgets.QPushButton("&Load", self)
-        # self.loadDataButtonB.move(233, 500)
-        # self.loadDataButtonB.clicked.connect(self.LoadDataB)
-        # self.loadDataButtonB.setEnabled(False)
 
         # flip & swap region
         self.flipswapReg = QtWidgets.QGroupBox('&Flip and &Swap', self)
@@ -718,8 +718,6 @@ class SegmentationForm(QtWidgets.QMainWindow):
         self.Shflag = False
         self.PSflag = False
 
-        self.LoadData()
-
     def FlipMenu(self):
         if self.Fflag:
             self.flipswapReg.hide()
@@ -778,45 +776,45 @@ class SegmentationForm(QtWidgets.QMainWindow):
             QtWidgets.QApplication.restoreOverrideCursor()
 
     def Colorize(self, data):
-        values = list(np.unique(self.dicom.dicomData))
-        values.pop(0)
+        # values = list(np.unique(self.dicom.dicomData))
+        self.dicom.values.pop(0)
 
         colorized_image = np.array([data, data, data]).transpose(1,2,3,0)
 
-        for i in range(len(values)):
-            colorized_image[self.dicom.dicomData==values[i]] = (np.random.randint(0,255), np.random.randint(0,255), np.random.randint(0,255))
+        for i in range(len(self.dicom.values)):
+            colorized_image[self.dicom.org_series==self.dicom.values[i]] = (np.random.randint(0,255), np.random.randint(0,255), np.random.randint(0,255))
 
         return colorized_image
 
-    # def LoadDir(self):
-    #     fname = QtWidgets.QFileDialog.getExistingDirectory()
-    #     try:
-    #         try:
-    #             with self.WaitCursor():
-    #                 if fname[0]:
-    #                     self.listWidget.clear()
-    #                     self.dicom = DicomClass()
-    #                     xx = self.dicom.DicomSelect(fname)
-    #                     for i in range(len(xx)):
-    #                         item = QtWidgets.QListWidgetItem(xx[i])
-    #                         self.listWidget.addItem(item)
-    #                 if (~self.loadDataButton.isEnabled()):
-    #                     self.loadDataButton.setEnabled(True)
-    #                 # self.mainform.dicom = []
-    #         except:
-    #             with self.WaitCursor():
-    #                 if fname[0]:
-    #                     self.listWidget.clear()
-    #                     self.dicom = NiftiClass()
-    #                     xx = self.dicom.DicomSelect(fname)
-    #                     for i in range(len(xx)):
-    #                         item = QtWidgets.QListWidgetItem(xx[i])
-    #                         self.listWidget.addItem(item)
-    #                 if (~self.loadDataButton.isEnabled()):
-    #                     self.loadDataButton.setEnabled(True)
-    #                 # self.mainform.dicom = []
-    #     except:
-    #         time.sleep(0.001)
+    def LoadDir(self):
+        fname = QtWidgets.QFileDialog.getExistingDirectory()
+        try:
+            try:
+                with self.WaitCursor():
+                    if fname[0]:
+                        self.listWidget.clear()
+                        self.dicom = DicomClass()
+                        xx = self.dicom.DicomSelect(fname)
+                        for i in range(len(xx)):
+                            item = QtWidgets.QListWidgetItem(xx[i])
+                            self.listWidget.addItem(item)
+                    if (~self.loadDataButton.isEnabled()):
+                        self.loadDataButton.setEnabled(True)
+                    # self.mainform.dicom = []
+            except:
+                with self.WaitCursor():
+                    if fname[0]:
+                        self.listWidget.clear()
+                        self.dicom = NiftiClass()
+                        xx = self.dicom.DicomSelect(fname)
+                        for i in range(len(xx)):
+                            item = QtWidgets.QListWidgetItem(xx[i])
+                            self.listWidget.addItem(item)
+                    if (~self.loadDataButton.isEnabled()):
+                        self.loadDataButton.setEnabled(True)
+                    # self.mainform.dicom = []
+        except:
+            time.sleep(0.001)
 
     def LoadDirB(self):
         fname = QtWidgets.QFileDialog.getExistingDirectory()
@@ -847,24 +845,24 @@ class SegmentationForm(QtWidgets.QMainWindow):
             time.sleep(0.001)
 
     def LoadData(self):
-        # try:
-        self.dicom = NiftiClass()
-        value = "Data/D99_atlas_v2.0.nii"
-        with self.WaitCursor():
-            self.dicom.ColorizedRead(value)
-            self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
-                              int(self.dicom.dicomSizePixel[2] / 2))
-            self.dicom.zeroPos = (0, 0, 0)
-            self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
-            self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
-            self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
-        # except:
-        #     # time.sleep(0.001)
-        #     msg = QtWidgets.QMessageBox()
-        #     msg.setIcon(QtWidgets.QMessageBox.Information)
-        #     msg.setWindowTitle("Error")
-        #     msg.setText('Dicom Series is not correct')
-        #     msg.exec_()
+        try:
+            self.dicom = NiftiClass()
+            value = "Data/D99_atlas_v2.0.nii"
+            with self.WaitCursor():
+                self.dicom.ColorizedRead(value)
+                self.dicom.pos = (int(self.dicom.dicomSizePixel[0] / 2), int(self.dicom.dicomSizePixel[1] / 2),
+                                  int(self.dicom.dicomSizePixel[2] / 2))
+                self.dicom.zeroPos = (0, 0, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 0)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 1)
+                self.ShowDicom(self.dicom.dicomData, self.dicom.pos, 2)
+        except:
+            # time.sleep(0.001)
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)
+            msg.setWindowTitle("Error")
+            msg.setText('Dicom Series is not correct')
+            msg.exec_()
 
     def LoadDataB(self):
         try:

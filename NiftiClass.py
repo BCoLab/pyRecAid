@@ -139,8 +139,9 @@ class NiftiClass:
         header = img.header
 
         series = np.array(img.get_data())
-        values = list(np.unique(series))
-        series[series<values[-256]] = 0
+        self.org_series = series.copy()
+        self.values = list(np.unique(series))
+        series[series<self.values[-256]] = 0
 
         # print(np.shape(series))
 
