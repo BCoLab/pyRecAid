@@ -583,6 +583,10 @@ class MainForm(QtWidgets.QMainWindow):
         coreg.setStatusTip('co-registration')
         coreg.triggered.connect(self.Coregistration)
 
+        segment = QtWidgets.QAction(QtGui.QIcon('open.png'), 'Segmentation', self)
+        segment.setStatusTip('Segmentation')
+        segment.triggered.connect(self.Segmentation)
+
         coregPet = QtWidgets.QAction(QtGui.QIcon('open.png'), 'Co-Registration(PET)', self)
         coregPet.setShortcut('Ctrl+D')
         coregPet.setStatusTip('co-registration')
@@ -634,6 +638,7 @@ class MainForm(QtWidgets.QMainWindow):
 
         fileMenu.addAction(LoadFile)
         toolsMenu.addAction(coreg)
+        toolsMenu.addAction(segment)
         # toolsMenu.addAction(coregPet)
         # toolsMenu.addAction(setZeroMenu)
         # toolsMenu.addAction(resliceMenu)
@@ -1507,14 +1512,14 @@ class MainForm(QtWidgets.QMainWindow):
     def manual(self):
         if sys.platform == 'win32':
             try:
-                os.system('start ' + 'Resource/v_1.pdf')
+                os.system('start ' + 'Files/UserManual.pdf')
 
             except:
                 self.msg = Er_msg(self, msg='didn\'t manage to open the manual\n please open it yourself')
 
         else:
             try:
-                subprocess.Popen(['evince', 'Resource/v_1.pdf'], stdin=False, stdout=False, stderr=False,
+                subprocess.Popen(['evince', 'Files/UserManual.pdf'], stdin=False, stdout=False, stderr=False,
                                  close_fds=True)
 
             except:
